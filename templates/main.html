@@ -1,13 +1,13 @@
-<!DOCTYPE HTML>
-<html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<title>2048 - Main Page</title>
-	<link rel="stylesheet" href="static/mainstyle.css" />
-</head>
-
-<body>
-	<h1>Menu</h1>
-	<a href="{{ url_for('game') }}"><button>Play</button></a>
-</body>
-</html>
+{% extends 'base.html' %}
+	{% block title %}Main Menu  {% endblock %}
+	{% block content %}
+	<div class="header"><h1>Main Menu</h1></div>
+	<div class="buttons">
+			{{ result }}
+		<ul>
+			<li><a onclick="alert('hej');" class="btn">Login</a></li>
+			<li><a href="{{ url_for('register') }}" class="btn">Register</a></li>
+		</ul>
+	</div>
+	{% endblock %}
+	
