@@ -1,0 +1,16 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>{% block title %}{% endblock %} - 2048</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='mainstyle.css') }}" />
+    <script src="{{ url_for('static', filename='scripts.js') }}"></script>
+    {% block head %}
+    {% endblock %}
+</head>
+<body>
+    <div id="main-content">
+        {% block content %}{% endblock %}
+    </div>
+</body>
+</html>
