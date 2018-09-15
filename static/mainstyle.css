@@ -2,5 +2,124 @@
 @import "paragraph.css;";
 
 body {
-    background-color: aqua;
+    width: 100%;
+    background-color:white;
+}
+
+#main-content {
+    margin: 5% 15% 0% 15%;
+    width: 70%;
+    height: 600px;
+    border: 3px solid rgb(248, 163, 67);
+    background-color: rgb(247, 198, 107);
+    border-radius: 30px;
+    padding: 3%;
+
+}
+
+#main-content button {
+    width: 40%;
+    height: 50px;
+}
+
+#main-content .header {
+    width: 80%;
+    margin: 0 10% 0 10%;
+    color: rgb(243, 236, 221);
+}
+
+#main-content .header {
+    font-size: 4rem;
+    text-align: center;
+    text-shadow: 2px 0 10px;
+    -webkit-text-shadow: 0 0 30px;
+    -webkit-text-stroke-width: 2px;
+    -webkit-text-stroke-color: #fff;
+}
+
+.btn:hover {
+    cursor: pointer;
+}
+
+.buttons {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+ul {
+    padding: 0px;
+    margin: 0px;
+    display: flex;
+}
+
+ul li {
+    list-style: none;
+    border: 2px solid transparent;
+    font-size: 15px;
+    font-weight: bold;
+    margin: 30px;
+    border-radius: 15px;
+    font-family: Arial;
+}
+
+ul li a {
+    text-decoration: none;
+    padding: 15px 35px;
+    display: block;
+    text-align: center;
+    border-radius: 15px;
+}
+
+ul li:nth-child(1) a {
+    color: red;
+    border: 2px solid rgb(255,30,50,1);
+}
+
+ul li:nth-child(2) a {
+    color: rgb(42, 6, 247);
+    border: 2px solid rgb(98, 10, 199);
+}
+
+ul li:nth-child(1):hover a {
+    box-shadow: 0px 0px 5px rgb(255,30,50,0.3), 0px 0px 10px rgb(255,30,50,0.8);
+    background-color: rgb(255, 30, 50, 0.5);
+    color: rgb(236, 176, 180);
+}
+
+ul li:nth-child(2):hover a {
+    background-color: rgb(144, 128, 238);
+    color: rgb(198, 198, 241);
+    box-shadow: 0px 0px 5px rgb(42, 6, 247), 0px 0px 10px rgb(42, 6, 247);
+}
+
+#register-form {
+    margin: auto;
+    padding: inherit;
+    width: 50%;
+    height: 30%;
+}
+
+#register-form input {
+    margin: 1%;
+    width: 50%;
+    height: 30px;
+}
+
+#register-form label {
+    font-size: 1.5rem;
+}
+
+#register-form button {
+    width: 40%
+}
+
+
+#register-form-buttons #form-register-button {
+    margin-left: 0;
+}
+
+#register-form-buttons #form-back-button {
+    margin-right: 0%;
 }
