@@ -12,43 +12,25 @@ def main():
 
 @app.route('/game')
 def game():
-    game = logic.start_game()
     return render_template('gameplay.html', game=game)
 
 
-@app.route('/game/left')
-def move_left():
-    game = logic.get_progress()
-    game = logic.make_movement(game, 4)
-    logic.save_progress(game)
-    return render_template('gameplay.html', game=game)
-
-
-@app.route('/game/right')
-def move_right():
-    game = logic.get_progress()
-    game = logic.make_movement(game, 2)
-    logic.save_progress(game)
-    return render_template('gameplay.html', game=game)
-
-
-@app.route('/game/up')
-def move_up():
-    game = logic.get_progress()
-    game = logic.make_movement(game, 1)
-    logic.save_progress(game)
-    return render_template('gameplay.html', game=game)
-
-
-@app.route('/game/down')
-def move_down():
-    game = logic.get_progress()
-    game = logic.make_movement(game, 3)
-    logic.save_progress(game)
-    return render_template('gameplay.html', game=game)
+@app.route('/register', methods=['GET', 'POST'])
+def register():
+    if request.method == 'GET':
+        return render_template('register.html')
+    else:
+        new_player_data = request.form.to_dict()
+        result = logic.register_user(new_player_data)
+        flash(result['message'])
+        if not result['status']:
+            return redirect(url_for('register'))
+        else:
+            return redirect(url_for('main'))
 
 
 if __name__ == "__main__":
+    app.secret_key = urandom(24)
     app.run(
         host='127.0.0.1',
         port=5000,
