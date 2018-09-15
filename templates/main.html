@@ -1,12 +1,13 @@
-<!doctype html>
-<html>
-	<head>
-		<title>
-			2048 - Main Page
-		</title>
-	</head>
-	<body>
-		<p id="menu"><h1>Menu<h1></p>
-		<div><a href="{{ url_for('game') }}"><button>Play</button></a></div>
-	</body>
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>2048 - Main Page</title>
+	<link rel="stylesheet" href="static/mainstyle.css" />
+</head>
+
+<body>
+	<h1>Menu</h1>
+	<a href="{{ url_for('game') }}"><button>Play</button></a>
+</body>
 </html>
