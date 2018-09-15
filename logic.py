@@ -1,20 +1,26 @@
 import data_handler as dh
 import helper_functions as hf
 import numpy as np
+from werkzeug.security import generate_password_hash, check_password_hash
 
 
-EMPTY_BOARD = [[0, 0, 0, 0],
-               [0, 0, 0, 0],
-               [0, 0, 0, 0],
-               [0, 0, 0, 0]]
+def register_user(registration_form):
+    """
+    Takes user form as argument, check if username exists,
+    if doesn't then hash password,create new user and set message to positive.
+    Else set message to negative.
 
+    Args: Dictionary with 'username' and 'password' keys.
 
-def get_progress():
-    return dh.read_file()
+    """
 
+    result = {'status': True, 'message': 'Successfully registered!'}
+    add_user = dh.add_player(registration_form)
+    if not add_user:
+        result['status'] = False
+        result['message'] = 'Username already exists.'
 
-def save_progress(game):
-    return dh.save_to_file(game)
+    return result
 
 
 def insert_one_random(game):
