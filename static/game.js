@@ -49,27 +49,28 @@ function getRandom(min, max) {
 }
 
 
-function insertRandomTile() {
+function insertRandomTile(game_board) {
     let pair = [getRandom(0,3), getRandom(0,3)];
-    let flatBoard = gameBoard.flat();
+    let flatBoard = game_board.flat();
 
     if (flatBoard.indexOf(0) > -1) {
-        while (gameBoard[pair[0]][pair[1]] != 0) {
+        while (game_board[pair[0]][pair[1]] != 0) {
             pair = [getRandom(0,3), getRandom(0,3)]
         }
 
         if (getRandom(0, 20) == 10) {
-            gameBoard[pair[0]][pair[1]] = TWO*TWO;
+            game_board[pair[0]][pair[1]] = TWO*TWO;
         }
         else {
-            gameBoard[pair[0]][pair[1]] = TWO;
+            game_board[pair[0]][pair[1]] = TWO;
         }
     }
+    return game_board
 }
 
 function startGame() {
-    insertRandomTile();
-    insertRandomTile();
+    gameBoard = insertRandomTile(gameBoard);
+    gameBoard = insertRandomTile(gameBoard);
 
     STARTED = true;
 
@@ -146,7 +147,7 @@ function movement(movement_direction) {
         gameBoard = reduceZeros(gameBoard);
         sumTiles(gameBoard);
         gameBoard = reduceZeros(gameBoard);
-        insertRandomTile();
+        gameBoard = insertRandomTile(gameBoard);
 
         switch (movement_direction) {
             case UP:
