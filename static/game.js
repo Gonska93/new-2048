@@ -157,7 +157,7 @@ function movement(movement_direction) {
                 break;
             case DOWN:
                 rotateBoard(gameBoard);
-                reverseRows();
+                gameBoard.reverse();
                 break;
         }
         refreshGameBoard(gameBoard);
@@ -224,12 +224,4 @@ function reverseBoard(game_board) {
         result.push(row.reverse());
     }
     game_board = result;
-}
-
-function reverseRows() {
-    var result = [];
-    for (var i = 3;i >= 0; i--) {
-        result.push(gameBoard[i])
-    }
-    gameBoard = result;
 }
