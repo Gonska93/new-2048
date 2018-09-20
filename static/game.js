@@ -143,9 +143,9 @@ function movement(movement_direction) {
                 break;
         }
 
-        reduceZeros();
+        gameBoard = reduceZeros(gameBoard);
         sumTiles(gameBoard);
-        reduceZeros();
+        gameBoard = reduceZeros(gameBoard);
         insertRandomTile();
 
         switch (movement_direction) {
@@ -165,9 +165,9 @@ function movement(movement_direction) {
 }
 
 // defult - moving tiles to left side
-function reduceZeros() {
+function reduceZeros(game_board) {
     var result = [];
-    for (row of gameBoard) {
+    for (row of game_board) {
         var counter = 0;
         var temporary_list = [];
         for (element of row) {
@@ -183,7 +183,7 @@ function reduceZeros() {
         }
         result.push(temporary_list);
     }
-    gameBoard = result;
+    return result;
 }
 
 // default - summing to left direction
