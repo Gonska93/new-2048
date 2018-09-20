@@ -1,27 +1,46 @@
-<!doctype html>
-<html>
-<head>
-	<meta charset="UTF-8">
-	<title>2048 - Game</title>
-	<link rel="stylesheet" href="{{ url_for('static', filename='mainstyle.css') }}" />
-</head>
-
-<body>
-	<h1>2048</h1>
-	<table>
-		{% for row in game %}
-		<tr>
-			{% for element in row %}
-			<td>{{ element }}</td>
-			{% endfor %}
-		</tr>
-		{% endfor %}
-	</table>
-	<a href="{{ url_for('move_up') }}"><button>UP</button></a>
-	<a href="{{ url_for('move_down') }}"><button>DOWN</button></a>
-	<a href="{{ url_for('main') }}"><button>Back</button></a>
-	<a href="{{ url_for('game') }}"><button>Reset</button></a>
-	<a href="{{ url_for('move_left') }}"><button>LEFT</button></a>
-	<a href="{{ url_for('move_right') }}"><button>RIGHT</button></a>
-</body>
-</html>
+{% extends 'base.html' %}
+	{% block title %}Game {% endblock %}
+{% block content %}
+	<div id="game-board">
+		<table>
+			<tr>
+				<th></th>
+				<th></th>
+				<th></th>
+				<th></th>
+			</tr>
+			<tr>
+				<td id='A1'></td>
+				<td id='A2'></td>
+				<td id='A3'></td>
+				<td id='A4'></td>
+			</tr>
+			<tr>
+				<td id='B1'></td>
+				<td id='B2'></td>
+				<td id='B3'></td>
+				<td id='B4'></td>
+			</tr>
+			<tr>
+				<td id='C1'></td>
+				<td id='C2'></td>
+				<td id='C3'></td>
+				<td id='C4'></td>
+			</tr>
+			<tr>
+				<td id='D1'></td>
+				<td id='D2'></td>
+				<td id='D3'></td>
+				<td id='D4'></td>
+			</tr>
+		</table>
+	</div>
+	<div class="buttons" id="game-buttons">
+		<button id="start-button" onclick="startGame()">Start Game</button>
+		<ul>
+			<li><a class="btn">Load</a></li>
+			<li><a class="btn">Save</a></li>
+			<li><a href="{{ url_for('logout') }}" class="btn">Logout</a></li>
+		</ul>
+	</div>
+{% endblock %}

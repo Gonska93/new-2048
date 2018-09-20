@@ -4,23 +4,10 @@ import numpy as np
 from werkzeug.security import generate_password_hash, check_password_hash
 
 
-def register_user(registration_form):
-    """
-    Takes user form as argument, check if username exists,
-    if doesn't then hash password,create new user and set message to positive.
-    Else set message to negative.
-
-    Args: Dictionary with 'username' and 'password' keys.
-
-    """
-
-    result = {'status': True, 'message': 'Successfully registered!'}
-    add_user = dh.add_player(registration_form)
-    if not add_user:
-        result['status'] = False
-        result['message'] = 'Username already exists.'
-
-    return result
+EMPTY_BOARD = [[0, 0, 0, 0],
+               [0, 0, 0, 0],
+               [0, 0, 0, 0],
+               [0, 0, 0, 0]]
 
 
 def insert_one_random(game):
@@ -34,11 +21,7 @@ def insert_one_random(game):
 
 
 def start_game():
-    dh.save_to_file(EMPTY_BOARD)
-    empty_game = dh.read_file()
-    game = hf.insert_random_2(empty_game)
-    dh.save_to_file(game)
-
+    game = hf.insert_random_2(EMPTY_BOARD)
     return game
 
 

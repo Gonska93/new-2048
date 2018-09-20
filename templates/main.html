@@ -1,13 +1,28 @@
 {% extends 'base.html' %}
 	{% block title %}Main Menu  {% endblock %}
-	{% block content %}
+
+	{% block menu_title %}
 	<div class="header"><h1>Main Menu</h1></div>
-	<div class="buttons">
-			{{ result }}
-		<ul>
-			<li><a onclick="alert('hej');" class="btn">Login</a></li>
-			<li><a href="{{ url_for('register') }}" class="btn">Register</a></li>
-		</ul>
-	</div>
+	{% endblock %}
+
+	{% block content %}
+	<div id="menu-content">
+		{% if 'player_name' in session %}
+		<div>Logged as {{ session['player_name'] }}</div>
+		<div class="buttons">
+			<ul>
+				<li><a href="{{ url_for('game') }}" onclick="startGame()" class="btn">Play</a></li>
+				<li><a href="{{ url_for('logout') }}" class="btn">Logout</a></li>
+			</ul>
+		</div>
+		{% else %}
+		<div class="buttons">
+			<ul>
+				<li><a onclick="insertForm('login')" class="btn">Login</a></li>
+				<li><a onclick="insertForm('register')" class="btn">Register</a></li>
+			</ul>
+		</div>
+		{% endif %}
+	</div>	
 	{% endblock %}
 	

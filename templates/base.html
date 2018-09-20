@@ -5,12 +5,32 @@
 	<title>{% block title %}{% endblock %} - 2048</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='mainstyle.css') }}" />
     <script src="{{ url_for('static', filename='scripts.js') }}"></script>
+    <script src="{{ url_for('static', filename='game.js') }}"></script>
     {% block head %}
     {% endblock %}
 </head>
 <body>
+    {{ session }}
     <div id="main-content">
+        {% block menu_title %}{% endblock %}
         {% block content %}{% endblock %}
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                <div class=flashes>
+                    {% for message in messages %}
+                        {% if "Successfully" in message %}
+                            <div id="message-success">
+                                <h5>{{ message }}</h5>
+                            </div>
+                        {% else %}
+                            <div id="message-fail">
+                                <h5>{{ message }}</h5>
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            {% endif %}
+        {% endwith %}
     </div>
 </body>
 </html>
