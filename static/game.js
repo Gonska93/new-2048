@@ -135,11 +135,11 @@ function movement(movement_direction) {
                 rotateBoard();
                 break;
             case RIGHT:
-                reverseBoard();
+                reverseBoard(gameBoard);
                 break;
             case DOWN:
                 rotateBoard();
-                reverseBoard();
+                reverseBoard(gameBoard);
                 break;
         }
 
@@ -153,10 +153,10 @@ function movement(movement_direction) {
                 rotateBoard();
                 break;
             case RIGHT:
-                reverseBoard();
+                reverseBoard(gameBoard);
                 break;
             case DOWN:
-                rotateBoard();
+                rotateBoard(gameBoard);
                 reverseRows();
                 break;
         }
@@ -218,12 +218,12 @@ function rotateBoard() {
 }
 
 // reverse all elements inside rows
-function reverseBoard() {
+function reverseBoard(game_board) {
     var result = [];
-    for (row of gameBoard) {
+    for (row of game_board) {
         result.push(row.reverse());
     }
-    gameBoard = result;
+    game_board = result;
 }
 
 function reverseRows() {
