@@ -132,31 +132,31 @@ function movement(movement_direction) {
     if (movement_direction in movement) {
         switch (movement_direction) {
             case UP:
-                rotateBoard();
+                gameBoard = rotateBoard(gameBoard);
                 break;
             case RIGHT:
                 reverseBoard(gameBoard);
                 break;
             case DOWN:
-                rotateBoard();
+                gameBoard = rotateBoard(gameBoard);
                 reverseBoard(gameBoard);
                 break;
         }
 
         reduceZeros();
-        sumTiles();
+        sumTiles(gameBoard);
         reduceZeros();
         insertRandomTile();
 
         switch (movement_direction) {
             case UP:
-                rotateBoard();
+                gameBoard = rotateBoard(gameBoard);
                 break;
             case RIGHT:
                 reverseBoard(gameBoard);
                 break;
             case DOWN:
-                rotateBoard(gameBoard);
+                gameBoard = rotateBoard(gameBoard);
                 gameBoard.reverse();
                 break;
         }
@@ -187,8 +187,8 @@ function reduceZeros() {
 }
 
 // default - summing to left direction
-function sumTiles() {
-    for (row of gameBoard) {
+function sumTiles(game_board) {
+    for (row of game_board) {
         if ((row[0] == row[1]) && (row[0] != ZERO)) {
             row[0] = row[0]*TWO;
             row[1] = ZERO;
@@ -204,17 +204,17 @@ function sumTiles() {
     }
 }
 
-function rotateBoard() {
+function rotateBoard(game_board) {
     var result = [];
     var row, column;
     for (column = 0; column < 4; column++) {
         var temp = []
         for (row = 0; row < 4; row++) {
-            temp.push(gameBoard[row][column])
+            temp.push(game_board[row][column])
         }
         result.push(temp);
     }
-    gameBoard = result;
+    return result;
 }
 
 // reverse all elements inside rows
