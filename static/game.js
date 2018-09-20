@@ -129,6 +129,8 @@ function movement(movement_direction) {
                     2: 'up',
                     3: 'right',
                     4: 'down'}
+    
+    var boardBeforeMovement = gameBoard.slice();
 
     if (movement_direction in movement) {
         switch (movement_direction) {
@@ -147,19 +149,27 @@ function movement(movement_direction) {
         gameBoard = reduceZeros(gameBoard);
         sumTiles(gameBoard);
         gameBoard = reduceZeros(gameBoard);
-        gameBoard = insertRandomTile(gameBoard);
 
         switch (movement_direction) {
             case UP:
                 gameBoard = rotateBoard(gameBoard);
+                comparison = arraysEqual(boardBeforeMovement, gameBoard);
                 break;
             case RIGHT:
+                comparison = arraysEqual(boardBeforeMovement, gameBoard);
                 reverseBoard(gameBoard);
                 break;
             case DOWN:
                 gameBoard = rotateBoard(gameBoard);
                 gameBoard.reverse();
+                comparison = arraysEqual(boardBeforeMovement, gameBoard);
                 break;
+            case LEFT:
+                comparison = arraysEqual(boardBeforeMovement, gameBoard);
+                break;
+        }
+        if (!(comparison)) {
+            gameBoard = insertRandomTile(gameBoard);
         }
         refreshGameBoard(gameBoard);
     }
@@ -225,4 +235,18 @@ function reverseBoard(game_board) {
         result.push(row.reverse());
     }
     game_board = result;
+}
+
+
+function arraysEqual(arr1, arr2) {
+    if(arr1.length !== arr2.length) {
+        return false;
+    }
+    for(var i = 0; i < arr1.length; i++) {
+        for (var j = 0; j < arr1[i].length; j++){
+        if(arr1[i][j] !== arr2[i][j])
+            return false;
+        }
+    }
+    return true;
 }
