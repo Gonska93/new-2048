@@ -1,5 +1,4 @@
 from flask import Flask, request, redirect, render_template, url_for, session, flash
-import logic
 from os import urandom
 import user_handler as uh
 

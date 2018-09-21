@@ -101,28 +101,33 @@ function round(value, precision) {
 
 
 document.onkeydown = function(e) {
-    e = e || window.event;
-    switch(e.which || e.keyCode) {
-        case 37: // left
-        gameBoard = movement(1, gameBoard);
-        break;
+    if (checkAnyMovementAvailability(gameBoard)) {
+        e = e || window.event;
+        switch(e.which || e.keyCode) {
+            case 37: // left
+            gameBoard = movement(1, gameBoard);
+            break;
 
-        case 38: // up
-        gameBoard = movement(2, gameBoard);
-        break;
+            case 38: // up
+            gameBoard = movement(2, gameBoard);
+            break;
 
-        case 39: // right
-        gameBoard = movement(3, gameBoard);
-        break;
+            case 39: // right
+            gameBoard = movement(3, gameBoard);
+            break;
 
-        case 40: // down
-        gameBoard = movement(4, gameBoard);
-        break;
+            case 40: // down
+            gameBoard = movement(4, gameBoard);
+            break;
 
-        default: return; // exit this handler for other keys
+            default: return; // exit this handler for other keys
+        }
+        refreshGameBoard(gameBoard);
+        e.preventDefault(); // prevent the default action (scroll / move caret)
     }
-    refreshGameBoard(gameBoard);
-    e.preventDefault(); // prevent the default action (scroll / move caret)
+    else {
+        document.write('GAME OVER!');
+    }
 };
 
 function movement(movement_direction, game_board) {
@@ -250,4 +255,25 @@ function arraysEqual(arr1, arr2) {
         }
     }
     return true;
+}
+
+function checkAnyMovementAvailability(board_name) {
+    let movements = [LEFT, UP, RIGHT, DOWN];
+    let copy;
+
+    copy = [];
+    for (l of board_name) {
+        copy.push(l.slice());
+    }
+
+    for (mov of movements) {
+        copy = [];
+        for (l of board_name) {
+            copy.push(l.slice());
+        }
+        if (!(arraysEqual(board_name, movement(mov, copy)))) {
+            return true;
+        }
+    }
+    return false;
 }
