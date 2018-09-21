@@ -4,9 +4,9 @@ body {
 }
 
 #main-content {
-    margin: 5% 15% 0% 15%;
+    margin: 1% 10% 1% 10%;
     width: 70%;
-    height: 600px;
+    height: 800px;
     border: 3px solid rgb(248, 163, 67);
     background-color: rgb(247, 198, 107);
     border-radius: 30px;
@@ -157,11 +157,12 @@ ul li:nth-child(1):hover a {
     border: 2px solid rgb(207, 103, 42);
     background-color: rgba(248, 158, 158, 0.472);
     width: 25%;
-    height: 140px;
+    height: 11.8rem;
     border-radius: 15px;
 }
 
-#game-buttons {
-    margin-top: -48%;
+#main-content #game-buttons {
+    width: 20%;
     margin-left: 80%;
+    margin-top: -800px;
 }

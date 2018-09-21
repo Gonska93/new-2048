@@ -104,74 +104,78 @@ document.onkeydown = function(e) {
     e = e || window.event;
     switch(e.which || e.keyCode) {
         case 37: // left
-        movement(1);
+        gameBoard = movement(1, gameBoard);
         break;
 
         case 38: // up
-        movement(2);
+        gameBoard = movement(2, gameBoard);
         break;
 
         case 39: // right
-        movement(3);
+        gameBoard = movement(3, gameBoard);
         break;
 
         case 40: // down
-        movement(4);
+        gameBoard = movement(4, gameBoard);
         break;
 
         default: return; // exit this handler for other keys
     }
+    refreshGameBoard(gameBoard);
+    if (checkForGameOver(gameBoard)) {
+        document.write('GAMEOVER');
+    }
     e.preventDefault(); // prevent the default action (scroll / move caret)
 };
 
-function movement(movement_direction) {
+function movement(movement_direction, game_board) {
     let movement = {1: 'left',
                     2: 'up',
                     3: 'right',
                     4: 'down'}
     
-    var boardBeforeMovement = gameBoard.slice();
+    var boardBeforeMovement = game_board.slice();
 
     if (movement_direction in movement) {
         switch (movement_direction) {
             case UP:
-                gameBoard = rotateBoard(gameBoard);
+                game_board = rotateBoard(game_board);
                 break;
             case RIGHT:
-                reverseBoard(gameBoard);
+                game_board = reverseBoard(game_board);
                 break;
             case DOWN:
-                gameBoard = rotateBoard(gameBoard);
-                reverseBoard(gameBoard);
+                game_board = rotateBoard(game_board);
+                game_board = reverseBoard(game_board);
                 break;
         }
 
-        gameBoard = reduceZeros(gameBoard);
-        sumTiles(gameBoard);
-        gameBoard = reduceZeros(gameBoard);
+        game_board = reduceZeros(game_board);
+        sumTiles(game_board);
+        game_board = reduceZeros(game_board);
 
         switch (movement_direction) {
             case UP:
-                gameBoard = rotateBoard(gameBoard);
-                comparison = arraysEqual(boardBeforeMovement, gameBoard);
+                game_board = rotateBoard(game_board);
+                comparison = arraysEqual(boardBeforeMovement, game_board);
                 break;
             case RIGHT:
-                comparison = arraysEqual(boardBeforeMovement, gameBoard);
-                reverseBoard(gameBoard);
+                comparison = arraysEqual(boardBeforeMovement,game_board);
+                reverseBoard(game_board);
                 break;
             case DOWN:
-                gameBoard = rotateBoard(gameBoard);
-                gameBoard.reverse();
-                comparison = arraysEqual(boardBeforeMovement, gameBoard);
+                game_board = rotateBoard(game_board);
+                game_board.reverse();
+                comparison = arraysEqual(boardBeforeMovement, game_board);
                 break;
             case LEFT:
-                comparison = arraysEqual(boardBeforeMovement, gameBoard);
+                comparison = arraysEqual(boardBeforeMovement, game_board);
                 break;
         }
         if (!(comparison)) {
-            gameBoard = insertRandomTile(gameBoard);
+            game_board = insertRandomTile(game_board);
         }
-        refreshGameBoard(gameBoard);
+        return game_board
     }
 }
 
@@ -234,7 +238,7 @@ function reverseBoard(game_board) {
     for (row of game_board) {
         result.push(row.reverse());
     }
-    game_board = result;
+    return result;
 }
 
 
@@ -249,4 +253,11 @@ function arraysEqual(arr1, arr2) {
         }
     }
     return true;
+}
+
+function checkForGameOver(game_board) {
+    var allMovements = [1, 2, 3, 4];
+
+    
+    return false;
 }
