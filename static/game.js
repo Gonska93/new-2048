@@ -122,9 +122,6 @@ document.onkeydown = function(e) {
         default: return; // exit this handler for other keys
     }
     refreshGameBoard(gameBoard);
-    if (checkForGameOver(gameBoard)) {
-        document.write('GAMEOVER');
-    }
     e.preventDefault(); // prevent the default action (scroll / move caret)
 };
 
@@ -161,11 +158,11 @@ function movement(movement_direction, game_board) {
                 break;
             case RIGHT:
                 comparison = arraysEqual(boardBeforeMovement,game_board);
-                reverseBoard(game_board);
+                game_board = reverseBoard(game_board);
                 break;
             case DOWN:
                 game_board = rotateBoard(game_board);
-                game_board.reverse();
+                game_board = game_board.reverse();
                 comparison = arraysEqual(boardBeforeMovement, game_board);
                 break;
             case LEFT:
@@ -175,8 +172,8 @@ function movement(movement_direction, game_board) {
         if (!(comparison)) {
             game_board = insertRandomTile(game_board);
         }
-        return game_board
     }
+    return game_board
 }
 
 // defult - moving tiles to left side
@@ -253,11 +250,4 @@ function arraysEqual(arr1, arr2) {
         }
     }
     return true;
-}
-
-function checkForGameOver(game_board) {
-    var allMovements = [1, 2, 3, 4];
-
-    
-    return false;
 }
