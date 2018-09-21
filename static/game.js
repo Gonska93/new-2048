@@ -8,7 +8,8 @@ table = ['A1', 'A2', 'A3', 'A4',
          'C1', 'C2', 'C3', 'C4',
          'D1', 'D2', 'D3', 'D4'];
 
-colors = {'': 'white', 2: 'orange', 4: 'red', 8: 'green', 16: 'blue'};
+colors = {'': 'white', 2: 'orange', 4: 'yellow', 8: 'green', 16: 'blue', 32: 'purple', 64: 'lightgreen', 128: 'aqua', 256: 'lightblue', 512: 'lightgreen',
+          1024: 'red', 2048: 'brown'};
 
 ZERO = 0; 
 ONE = 1;
@@ -19,8 +20,7 @@ UP = 2;
 RIGHT = 3;
 DOWN = 4;
 
-STARTED = false;
-
+var STARTED = false;
 
 function refreshGameBoard(game_board) {
     var displayBoard = game_board.flat();
@@ -100,33 +100,35 @@ function round(value, precision) {
 }
 
 
-document.onkeydown = function(e) {
-    if (checkAnyMovementAvailability(gameBoard)) {
-        e = e || window.event;
-        switch(e.which || e.keyCode) {
-            case 37: // left
-            gameBoard = movement(1, gameBoard);
-            break;
+document.onkeydown = function(e) {4
+    if (STARTED === true) {
+        if (checkAnyMovementAvailability(gameBoard)) {
+            e = e || window.event;
+            switch(e.which || e.keyCode) {
+                case 37: // left
+                gameBoard = movement(1, gameBoard);
+                break;
 
-            case 38: // up
-            gameBoard = movement(2, gameBoard);
-            break;
+                case 38: // up
+                gameBoard = movement(2, gameBoard);
+                break;
 
-            case 39: // right
-            gameBoard = movement(3, gameBoard);
-            break;
+                case 39: // right
+                gameBoard = movement(3, gameBoard);
+                break;
 
-            case 40: // down
-            gameBoard = movement(4, gameBoard);
-            break;
+                case 40: // down
+                gameBoard = movement(4, gameBoard);
+                break;
 
-            default: return; // exit this handler for other keys
+                default: return; // exit this handler for other keys
+            }
+            refreshGameBoard(gameBoard);
+            e.preventDefault(); // prevent the default action (scroll / move caret)
         }
-        refreshGameBoard(gameBoard);
-        e.preventDefault(); // prevent the default action (scroll / move caret)
-    }
-    else {
-        document.write('GAME OVER!');
+        else {
+            document.write('GAME OVER!');
+        }
     }
 };
 
