@@ -77,11 +77,11 @@ const gameplay = {
             toInsert;
 
         if (flatBoard.indexOf(0) > -1) {
-            while (game_board[pair[0]][pair[1]] != this.constant.zero) {
+            while (game_board[pair[0]][pair[1]] !== this.constant.zero) {
                 pair = [this.getRandom(0,3), this.getRandom(0,3)]
             }
 
-        game_board[pair[0]][pair[1]] = (this.getRandom(0, 20) == 10) ? this.constant.four: this.constant.two;
+        game_board[pair[0]][pair[1]] = (this.getRandom(0, 20) === 10) ? this.constant.four: this.constant.two;
         }
 
         return game_board
@@ -109,7 +109,7 @@ const gameplay = {
     },
 
     round: function (value, precision) {
-        var multiplier = Math.pow(10, precision || 0);
+        let multiplier = Math.pow(10, precision || 0);
         return Math.round(value * multiplier) / multiplier;
     },
 
@@ -119,7 +119,7 @@ const gameplay = {
                         3: 'right',
                         4: 'down'}
         
-        var boardBeforeMovement = game_board.slice();
+        let boardBeforeMovement = game_board.slice();
 
         if (movement_direction in movement) {
             switch (movement_direction) {
@@ -139,6 +139,7 @@ const gameplay = {
             this.sumTiles(game_board);
             game_board = this.reduceZeros(game_board);
 
+            let comparison;
             switch (movement_direction) {
                 case this.constant.up:
                     game_board = this.rotateBoard(game_board);
@@ -166,19 +167,19 @@ const gameplay = {
 
     // defult - moving tiles to left side
     reduceZeros: function (game_board) {
-        var result = [];
-        for (row of game_board) {
-            var counter = 0;
-            var temporary_list = [];
-            for (element of row) {
-                if (element != 0) {
+        let result = [];
+        for (let row of game_board) {
+            let counter = 0;
+            let temporary_list = [];
+            for (let element of row) {
+                if (element !== 0) {
                     temporary_list.push(element);
                 }
                 else {
                     counter = counter + 1;
                 }
             }
-            for (var i = 0; i < counter; i++) {
+            for (let i = 0; i < counter; i++) {
                 temporary_list.push(0);
             }
             result.push(temporary_list);
@@ -188,16 +189,16 @@ const gameplay = {
 
     // default - summing to left direction
     sumTiles: function (game_board) {
-        for (row of game_board) {
-            if ((row[0] == row[1]) && (row[0] != this.constant.zero)) {
+        for (let row of game_board) {
+            if ((row[0] === row[1]) && (row[0] !== this.constant.zero)) {
                 row[0] = row[0]*this.constant.two;
                 row[1] = this.constant.zero;
             }
-            else if ((row[1] == row[2]) && (row[1] != this.constant.zero)) {
+            else if ((row[1] === row[2]) && (row[1] !== this.constant.zero)) {
                 row[1] = row[1]*this.constant.two;
                 row[2] = this.constant.zero;
             }
-            else if ((row[2] == row[3]) && (row[2] != this.constant.zero)) {
+            else if ((row[2] === row[3]) && (row[2] !== this.constant.zero)) {
                 row[2] = row[2]*this.constant.two;
                 row[3] = this.constant.zero;
             }
@@ -233,8 +234,8 @@ const gameplay = {
         if(arr1.length !== arr2.length) {
             return false;
         }
-        for(var i = 0; i < arr1.length; i++) {
-            for (var j = 0; j < arr1[i].length; j++){
+        for(let i = 0; i < arr1.length; i++) {
+            for (let j = 0; j < arr1[i].length; j++){
             if(arr1[i][j] !== arr2[i][j])
                 return false;
             }
@@ -246,9 +247,9 @@ const gameplay = {
         let movements = [this.constant.left, this.constant.up, this.constant.right, this.constant.down],
             copy = [];
 
-        for (mov of movements) {
+        for (let mov of movements) {
             copy = [];
-            for (row of board_name) {
+            for (let row of board_name) {
                 copy.push(row.slice());
             }
             if (!(this.arraysEqual(board_name, this.movement(mov, copy)))) {
