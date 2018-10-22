@@ -4,18 +4,24 @@ from logic import user_handler as uh
 app = Flask(__name__)
 
 
-@app.route('/', methods=['GET', 'POST'])
+@app.route('/')
 def main():
-    if request.method == 'POST':
-        form_dict = request.form.to_dict()
-        if 'login' in form_dict:
-            uh.login_user(form_dict)
-        if 'register' in form_dict:
-            result = uh.register_user(form_dict)
-            flash(result['message'])
-        return render_template('main.html')
-    else:
-        return render_template('main.html')
+    return render_template('main.html')
+
+
+@app.route('/login', methods=['POST'])
+def login():
+    form_dict = request.form.to_dict()
+    uh.login_user(form_dict)
+    return redirect(url_for('main'))
+
+
+@app.route('/register', methods=['POST'])
+def register():
+    form_dict = request.form.to_dict()
+    result = uh.register_user(form_dict)
+    flash(result['message'])
+    return redirect(url_for('main'))
 
 
 @app.route('/game')

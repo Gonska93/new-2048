@@ -1,12 +1,13 @@
 var loginForm = { submitButtonName: 'login',
-                  submitButtonContent: 'Login'}
+                  submitButtonContent: 'Login',
+                  action: '/login'};
 
 var registerForm = {submitButtonName: 'register',
-                    submitButtonContent: 'Register'}
-
+                    submitButtonContent: 'Register',
+                    action: '/register'};
 
 function getForm(form) {
-        let formContent = `<form id="form" method="POST">
+        let formContent = `<form id="form" method="POST" action="${form.action}">
                                 <h3>${form.submitButtonContent}</h3>
                                 <label for="username">Player Name</label>
                                 <input name="username" placeholder="Enter User Name" required />
