@@ -13,7 +13,7 @@ def main():
 def login():
     form_dict = request.form.to_dict()
     result = uh.login_user(form_dict)
-    flash(result['message'])
+    flash(result['message'], result['status'])
     return redirect(url_for('main'))
 
 
@@ -21,7 +21,7 @@ def login():
 def register():
     form_dict = request.form.to_dict()
     result = uh.register_user(form_dict)
-    flash(result['message'])
+    flash(result['message'], result['status'])
     return redirect(url_for('main'))
 
 

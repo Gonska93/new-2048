@@ -19,7 +19,7 @@ def authenticate_user(func):
         if 'player_name' in session:
             return func(*args, **kwargs)
         else:
-            flash('You must be logged in to play.')
+            flash('You must be logged in to play.', False)
             return redirect(url_for('main'))
     return wrapper
 
