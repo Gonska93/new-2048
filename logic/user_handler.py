@@ -61,6 +61,7 @@ def login_user(login_form):
 
     player_name = login_form['username']
     check_player_existance = dh.get_player(player_name)
+    result = {'status': False, 'message': 'Wrong username or password.'}
 
     if check_player_existance:
         form_password = login_form.get('password')
@@ -68,6 +69,7 @@ def login_user(login_form):
 
         if check_password_hash(player_password, form_password):
             session['player_name'] = player_name
-            flash('Successfully logged in!')
-        else:
-            flash('Wrong player name or password!')
+            result['status'] = True
+            result['message'] = f'Welcome, {player_name}!'
+
+    return result

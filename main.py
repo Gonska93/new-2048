@@ -12,7 +12,8 @@ def main():
 @app.route('/login', methods=['POST'])
 def login():
     form_dict = request.form.to_dict()
-    uh.login_user(form_dict)
+    result = uh.login_user(form_dict)
+    flash(result['message'])
     return redirect(url_for('main'))
 
 
