@@ -1,0 +1,8 @@
+** Configuration file example **
+
+class PGSQL:
+    USER_NAME = 'username'
+    PASSWORD = 'password'
+    HOST = 'localhost'
+    DB_NAME = 'db_name'
+    DBURI = f'postgresql://{USER_NAME}:{PASSWORD}@{HOST}/{DB_NAME}'
