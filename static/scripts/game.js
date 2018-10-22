@@ -1,130 +1,28 @@
-gameBoard = [[0, 0, 0, 0],
-             [0, 0, 0, 0],
-             [0, 0, 0, 0],
-             [0, 0, 0, 0]];
-
-table = ['A1', 'A2', 'A3', 'A4',
-         'B1', 'B2', 'B3', 'B4',
-         'C1', 'C2', 'C3', 'C4',
-         'D1', 'D2', 'D3', 'D4'];
-
-colors = {'': 'white', 2: 'orange', 4: 'yellow', 8: 'green', 16: 'blue', 32: 'purple', 64: 'lightgreen', 128: 'aqua', 256: 'lightblue', 512: 'lightgreen',
-          1024: 'red', 2048: 'brown'};
-
-ZERO = 0; 
-ONE = 1;
-TWO = 2;
-
-LEFT = 1;
-UP = 2;
-RIGHT = 3;
-DOWN = 4;
-
-var STARTED = false;
-
-function refreshGameBoard(game_board) {
-    var displayBoard = game_board.flat();
-
-    for (let i = 0; i < table.length; i++) {
-        var element = document.getElementById(table[i]);
-        if (displayBoard[i] != 0) {
-            element.innerHTML = displayBoard[i];
-        }
-        else {
-            element.innerHTML = '';
-        }
-        addColors(table[i]);
-    }
-}
-
-function addColors (element_id) {
-    var el = document.getElementById(element_id);
-        content = el.textContent;
-        el.style.background = colors[content];
-}
-
-
-function getRandom(min, max) {
-    return Math.floor(Math.random() * (max - min + 1)) + min;
-}
-
-
-function insertRandomTile(game_board) {
-    let pair = [getRandom(0,3), getRandom(0,3)];
-    let flatBoard = game_board.flat();
-
-    if (flatBoard.indexOf(0) > -1) {
-        while (game_board[pair[0]][pair[1]] != 0) {
-            pair = [getRandom(0,3), getRandom(0,3)]
-        }
-
-        if (getRandom(0, 20) == 10) {
-            game_board[pair[0]][pair[1]] = TWO*TWO;
-        }
-        else {
-            game_board[pair[0]][pair[1]] = TWO;
-        }
-    }
-    return game_board
-}
-
-function startGame() {
-    gameBoard = insertRandomTile(gameBoard);
-    gameBoard = insertRandomTile(gameBoard);
-
-    STARTED = true;
-
-    refreshGameBoard(gameBoard);
-
-    let startButton = document.getElementById('start-button');
-        startButton.setAttribute('onclick', 'resetProgress()');
-        startButton.innerHTML = 'Reset';
-    
-}
-
-function resetProgress() {
-    gameBoard = [[0,0,0,0],[0,0,0,0],[0,0,0,0],[0,0,0,0]];
-    refreshGameBoard(gameBoard);
-
-    let startButton = document.getElementById('start-button');
-        startButton.setAttribute('onclick', 'startGame()');
-        startButton.innerHTML = 'Start Game';
-    
-    STARTED = false;
-}
-
-
-function round(value, precision) {
-    var multiplier = Math.pow(10, precision || 0);
-    return Math.round(value * multiplier) / multiplier;
-}
-
-
-document.onkeydown = function(e) {
-    if (STARTED === true) {
-        if (checkAnyMovementAvailability(gameBoard)) {
-            e = e || window.event;
-            switch(e.which || e.keyCode) {
+document.onkeydown = function(ev) {
+    if (gameplay.started === true) {
+        if (gameplay.checkAnyMovementAvailability(gameplay.gameBoard)) {
+            ev = ev || window.event;
+            switch(ev.which || ev.keyCode) {
                 case 37: // left
-                gameBoard = movement(1, gameBoard);
+                gameplay.gameBoard = gameplay.movement(1, gameplay.gameBoard);
                 break;
 
                 case 38: // up
-                gameBoard = movement(2, gameBoard);
+                gameplay.gameBoard = gameplay.movement(2, gameplay.gameBoard);
                 break;
 
                 case 39: // right
-                gameBoard = movement(3, gameBoard);
+                gameplay.gameBoard = gameplay.movement(3, gameplay.gameBoard);
                 break;
 
                 case 40: // down
-                gameBoard = movement(4, gameBoard);
+                gameplay.gameBoard = gameplay.movement(4, gameplay.gameBoard);
                 break;
 
                 default: return; // exit this handler for other keys
             }
-            refreshGameBoard(gameBoard);
-            e.preventDefault(); // prevent the default action (scroll / move caret)
+            gameplay.refreshGameBoard(gameplay.gameBoard);
+            ev.preventDefault(); // prevent the default action (scroll / move caret)
         }
         else {
             document.write('GAME OVER!');
@@ -132,150 +30,231 @@ document.onkeydown = function(e) {
     }
 };
 
-function movement(movement_direction, game_board) {
-    let movement = {1: 'left',
-                    2: 'up',
-                    3: 'right',
-                    4: 'down'}
-    
-    var boardBeforeMovement = game_board.slice();
+const gameplay = {
+    gameBoard: [[0, 0, 0, 0],
+                [0, 0, 0, 0],
+                [0, 0, 0, 0],
+                [0, 0, 0, 0]],
 
-    if (movement_direction in movement) {
-        switch (movement_direction) {
-            case UP:
-                game_board = rotateBoard(game_board);
-                break;
-            case RIGHT:
-                game_board = reverseBoard(game_board);
-                break;
-            case DOWN:
-                game_board = rotateBoard(game_board);
-                game_board = reverseBoard(game_board);
-                break;
+    table: ['A1', 'A2', 'A3', 'A4',
+            'B1', 'B2', 'B3', 'B4',
+            'C1', 'C2', 'C3', 'C4',
+            'D1', 'D2', 'D3', 'D4'],
+
+    colors: {'': 'white', 2: 'orange', 4: 'yellow', 8: 'green', 16: 'blue', 32: 'purple', 64: 'lightgreen', 128: 'aqua', 256: 'lightblue', 512: 'lightgreen',
+            1024: 'red', 2048: 'brown'},
+
+    constant: {'zero': 0, 'one': 1, 'two': 2, 'four': 4, 'left': 1, 'up': 2, 'right': 3, 'down': 4},
+
+    started: false,
+
+    refreshGameBoard: function (game_board) {
+        let displayBoard = game_board.flat(),
+            toInsert;
+
+        for (let i = 0; i < this.table.length; i++) {
+            $(`#${gameplay.table[i]}`).text(
+                (displayBoard[i]) ? toInsert = displayBoard[i]: toInsert = ''
+            );
+            this.addColors(this.table[i]);
         }
+    },
 
-        game_board = reduceZeros(game_board);
-        sumTiles(game_board);
-        game_board = reduceZeros(game_board);
+    addColors: function (element_id) {
+        let el = $(`#${element_id}`),
+            content = el.text();
 
-        switch (movement_direction) {
-            case UP:
-                game_board = rotateBoard(game_board);
-                comparison = arraysEqual(boardBeforeMovement, game_board);
-                break;
-            case RIGHT:
-                comparison = arraysEqual(boardBeforeMovement,game_board);
-                game_board = reverseBoard(game_board);
-                break;
-            case DOWN:
-                game_board = rotateBoard(game_board);
-                game_board = game_board.reverse();
-                comparison = arraysEqual(boardBeforeMovement, game_board);
-                break;
-            case LEFT:
-                comparison = arraysEqual(boardBeforeMovement, game_board);
-                break;
-        }
-        if (!(comparison)) {
-            game_board = insertRandomTile(game_board);
-        }
-    }
-    return game_board
-}
+        el.css('background-color', this.colors[content]);
+    },
 
-// defult - moving tiles to left side
-function reduceZeros(game_board) {
-    var result = [];
-    for (row of game_board) {
-        var counter = 0;
-        var temporary_list = [];
-        for (element of row) {
-            if (element != 0) {
-                temporary_list.push(element);
+    getRandom: function (min, max) {
+        return Math.floor(Math.random() * (max - min + 1)) + min;
+    },
+
+    insertRandomTile: function (game_board) {
+        let pair = [this.getRandom(0,3), this.getRandom(0,3)],
+            flatBoard = game_board.flat(),
+            toInsert;
+
+        if (flatBoard.indexOf(0) > -1) {
+            while (game_board[pair[0]][pair[1]] != this.constant.zero) {
+                pair = [this.getRandom(0,3), this.getRandom(0,3)]
             }
-            else {
-                counter = counter + 1;
+
+        game_board[pair[0]][pair[1]] = (this.getRandom(0, 20) == 10) ? this.constant.four: this.constant.two;
+        }
+
+        return game_board
+    },
+
+    startGame: function() {
+        let startButton = document.getElementById('start-button');
+        startButton.setAttribute('onclick', 'gameplay.resetProgress()');
+        startButton.innerHTML = 'Reset';
+
+        this.gameBoard = this.insertRandomTile(this.gameBoard);
+        this.gameBoard = this.insertRandomTile(this.gameBoard);
+        this.started = true;
+        this.refreshGameBoard(this.gameBoard);
+    },
+
+    resetProgress: function () {
+        let startButton = document.getElementById('start-button');
+        startButton.innerHTML = 'Start Game';
+        startButton.setAttribute('onclick', 'gameplay.startGame()');
+       
+        this.gameBoard = [[0,0,0,0],[0,0,0,0],[0,0,0,0],[0,0,0,0]];
+        this.started = true;
+        gameplay.refreshGameBoard(this.gameBoard);
+    },
+
+    round: function (value, precision) {
+        var multiplier = Math.pow(10, precision || 0);
+        return Math.round(value * multiplier) / multiplier;
+    },
+
+    movement: function (movement_direction, game_board) {
+        let movement = {1: 'left',
+                        2: 'up',
+                        3: 'right',
+                        4: 'down'}
+        
+        var boardBeforeMovement = game_board.slice();
+
+        if (movement_direction in movement) {
+            switch (movement_direction) {
+                case this.constant.up:
+                    game_board = this.rotateBoard(game_board);
+                    break;
+                case this.constant.right:
+                    game_board = this.reverseBoard(game_board);
+                    break;
+                case this.constant.down:
+                    game_board = this.rotateBoard(game_board);
+                    game_board = this.reverseBoard(game_board);
+                    break;
+            }
+
+            game_board = this.reduceZeros(game_board);
+            this.sumTiles(game_board);
+            game_board = this.reduceZeros(game_board);
+
+            switch (movement_direction) {
+                case this.constant.up:
+                    game_board = this.rotateBoard(game_board);
+                    comparison = this.arraysEqual(boardBeforeMovement, game_board);
+                    break;
+                case this.constant.right:
+                    comparison = this.arraysEqual(boardBeforeMovement,game_board);
+                    game_board = this.reverseBoard(game_board);
+                    break;
+                case this.constant.down:
+                    game_board = this.rotateBoard(game_board);
+                    game_board = game_board.reverse();
+                    comparison = this.arraysEqual(boardBeforeMovement, game_board);
+                    break;
+                case this.constant.left:
+                    comparison = this.arraysEqual(boardBeforeMovement, game_board);
+                    break;
+            }
+            if (!(comparison)) {
+                game_board = this.insertRandomTile(game_board);
             }
         }
-        for (var i = 0; i < counter; i++) {
-            temporary_list.push(0);
-        }
-        result.push(temporary_list);
-    }
-    return result;
-}
+        return game_board
+    },
 
-// default - summing to left direction
-function sumTiles(game_board) {
-    for (row of game_board) {
-        if ((row[0] == row[1]) && (row[0] != ZERO)) {
-            row[0] = row[0]*TWO;
-            row[1] = ZERO;
+    // defult - moving tiles to left side
+    reduceZeros: function (game_board) {
+        var result = [];
+        for (row of game_board) {
+            var counter = 0;
+            var temporary_list = [];
+            for (element of row) {
+                if (element != 0) {
+                    temporary_list.push(element);
+                }
+                else {
+                    counter = counter + 1;
+                }
+            }
+            for (var i = 0; i < counter; i++) {
+                temporary_list.push(0);
+            }
+            result.push(temporary_list);
         }
-        if ((row[1] == row[2]) && (row[1] != ZERO)) {
-            row[1] = row[1]*TWO;
-            row[2] = ZERO;
+        return result;
+    },
+
+    // default - summing to left direction
+    sumTiles: function (game_board) {
+        for (row of game_board) {
+            if ((row[0] == row[1]) && (row[0] != this.constant.zero)) {
+                row[0] = row[0]*this.constant.two;
+                row[1] = this.constant.zero;
+            }
+            else if ((row[1] == row[2]) && (row[1] != this.constant.zero)) {
+                row[1] = row[1]*this.constant.two;
+                row[2] = this.constant.zero;
+            }
+            else if ((row[2] == row[3]) && (row[2] != this.constant.zero)) {
+                row[2] = row[2]*this.constant.two;
+                row[3] = this.constant.zero;
+            }
         }
-        if ((row[2] == row[3]) && (row[2] != ZERO)) {
-            row[2] = row[2]*TWO;
-            row[3] = ZERO;
+    },
+    rotateBoard: function (game_board) {
+        let result = [],
+            row, 
+            column,
+            temp;
+
+        for (column = 0; column < 4; column++) {
+            temp = [];
+            for (row = 0; row < 4; row++) {
+                temp.push(game_board[row][column])
+            }
+            result.push(temp);
         }
-    }
-}
+        return result;
+    },
 
-function rotateBoard(game_board) {
-    var result = [];
-    var row, column;
-    for (column = 0; column < 4; column++) {
-        var temp = []
-        for (row = 0; row < 4; row++) {
-            temp.push(game_board[row][column])
+    // reverse all elements inside rows
+    reverseBoard: function (game_board) {
+        let result = [];
+
+        for (row of game_board) {
+            result.push(row.reverse());
         }
-        result.push(temp);
-    }
-    return result;
-}
+        return result;
+    },
 
-// reverse all elements inside rows
-function reverseBoard(game_board) {
-    var result = [];
-    for (row of game_board) {
-        result.push(row.reverse());
-    }
-    return result;
-}
-
-
-function arraysEqual(arr1, arr2) {
-    if(arr1.length !== arr2.length) {
-        return false;
-    }
-    for(var i = 0; i < arr1.length; i++) {
-        for (var j = 0; j < arr1[i].length; j++){
-        if(arr1[i][j] !== arr2[i][j])
+    arraysEqual: function (arr1, arr2) {
+        if(arr1.length !== arr2.length) {
             return false;
         }
-    }
-    return true;
-}
-
-function checkAnyMovementAvailability(board_name) {
-    let movements = [LEFT, UP, RIGHT, DOWN];
-    let copy;
-
-    copy = [];
-    for (l of board_name) {
-        copy.push(l.slice());
-    }
-
-    for (mov of movements) {
-        copy = [];
-        for (l of board_name) {
-            copy.push(l.slice());
+        for(var i = 0; i < arr1.length; i++) {
+            for (var j = 0; j < arr1[i].length; j++){
+            if(arr1[i][j] !== arr2[i][j])
+                return false;
+            }
         }
-        if (!(arraysEqual(board_name, movement(mov, copy)))) {
-            return true;
+        return true;
+    },
+
+    checkAnyMovementAvailability: function (board_name) {
+        let movements = [this.constant.left, this.constant.up, this.constant.right, this.constant.down],
+            copy = [];
+
+        for (mov of movements) {
+            copy = [];
+            for (row of board_name) {
+                copy.push(row.slice());
+            }
+            if (!(this.arraysEqual(board_name, this.movement(mov, copy)))) {
+                return true;
+            }
         }
+        return false;
     }
-    return false;
-}
+};
