@@ -1,0 +1,1 @@
+USERNAME_LENGTH_RANGE = range(50)
