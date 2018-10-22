@@ -7,6 +7,13 @@ from data import data_handler as dh
 
 
 def authenticate_user(func):
+    """
+    Decorator for authentication user. Created to use on routes.
+    If username is in the session, continues with the function, else redirects to index page.
+
+    :param func: Original function to prevent from not logged users.
+    :return: Original function call or redirect.
+    """
     @wraps(func)
     def wrapper(*args, **kwargs):
         if 'player_name' in session:
