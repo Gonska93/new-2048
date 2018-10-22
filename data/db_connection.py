@@ -1,14 +1,7 @@
 import psycopg2
 import psycopg2.extras
 from functools import wraps
-
-
-class PGSQL:
-    USER_NAME = 'admin'
-    PASSWORD = 'admin'
-    HOST = 'localhost'
-    DB_NAME = 'piotr'
-    DBURI = f'postgresql://{USER_NAME}:{PASSWORD}@{HOST}/{DB_NAME}'
+from data.db_config import PGSQL
 
 
 def open_database():

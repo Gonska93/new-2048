@@ -100,7 +100,7 @@ function round(value, precision) {
 }
 
 
-document.onkeydown = function(e) {4
+document.onkeydown = function(e) {
     if (STARTED === true) {
         if (checkAnyMovementAvailability(gameBoard)) {
             e = e || window.event;

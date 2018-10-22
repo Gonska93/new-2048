@@ -1,7 +1,7 @@
 from flask import session, redirect, url_for, flash
 from functools import wraps
-from werkzeug.security import generate_password_hash, check_password_hash
-import data_handler as dh
+from werkzeug.security import check_password_hash
+from data import data_handler as dh
 
 
 def authenticate_user(func):

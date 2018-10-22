@@ -6,6 +6,8 @@ DROP TABLE IF EXISTS game CASCADE;
 
 CREATE TABLE players (
    id serial NOT NULL,
+   player_name varchar(50) UNIQUE NOT NULL,
+   password varchar(120) NOT NULL,
    creation_date timestamp without time zone default date_trunc('second', localtimestamp)
 );
 
