@@ -1,12 +1,11 @@
 import data.db_connection as dbc
-from werkzeug.security import generate_password_hash, check_password_hash
 
 
 @dbc.connection_handler
 def get_player(cursor, player_name):
-    SQL = (f'SELECT 1 '
-           f'FROM players '
-           f"WHERE player_name='{player_name}';")
+    SQL = ("SELECT 1 "
+           "FROM players "
+           "WHERE player_name=%s;")
 
     cursor.execute(SQL, (player_name,))
     result = cursor.fetchone()
@@ -16,9 +15,9 @@ def get_player(cursor, player_name):
 
 @dbc.connection_handler
 def get_player_password(cursor, player_name):
-    SQL = (f'SELECT password '
-           f'FROM players '
-           f"WHERE player_name='{player_name}';")
+    SQL = ("SELECT password "
+           "FROM players "
+           "WHERE player_name=%s;")
 
     cursor.execute(SQL, (player_name,))
     result = cursor.fetchone()
@@ -28,19 +27,9 @@ def get_player_password(cursor, player_name):
 
 @dbc.connection_handler
 def add_player(cursor, registration_form):
-    player_name = registration_form.get('username')
+    SQL = ("INSERT INTO players (player_name, password) "
+           "VALUES (%s, %s);")
+    
+    cursor.execute(SQL, (registration_form['username'], registration_form['password']))
 
-    if get_player(player_name) is None:
-        password = generate_password_hash(registration_form.get('password'))
-
-        SQL = (f'INSERT INTO players (player_name, password) '
-               f"VALUES ('{player_name}', '{password}');")
-
-        cursor.execute(SQL, (player_name, password))
-        operation_state = True
-
-    else:
-        operation_state = False
-
-    return operation_state
 
