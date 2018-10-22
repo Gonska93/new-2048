@@ -1,13 +1,13 @@
-var loginForm = { submitButtonName: 'login',
+let forms = {'loginForm': { submitButtonName: 'login',
                   submitButtonContent: 'Login',
-                  action: '/login'};
-
-var registerForm = {submitButtonName: 'register',
+                  action: '/login'},
+            'registerForm': {submitButtonName: 'register',
                     submitButtonContent: 'Register',
-                    action: '/register'};
+                    action: '/register'}
+}
 
 function getForm(form) {
-        let formContent = `<form id="form" method="POST" action="${form.action}">
+        return `<form id="form" method="POST" action="${form.action}">
                                 <h3>${form.submitButtonContent}</h3>
                                 <label for="username">Player Name</label>
                                 <input name="username" placeholder="Enter User Name" required />
@@ -18,8 +18,7 @@ function getForm(form) {
                                 <button name="${form.submitButtonName}">${form.submitButtonContent}</button>
                                 <button id="back-button" onclick="insertMainButtons()">Back</button>
                                 </div>
-                            </form>`;
-        return formContent;
+                            </form>`
 }
 
 function insertMainButtons() {
@@ -32,15 +31,7 @@ function insertMainButtons() {
 
 
 function insertForm(form_name) {
-    if (form_name == 'login') {
-        var formContent = getForm(loginForm);
-    }
-    else if (form_name == 'register') {
-        var formContent = getForm(registerForm)
-    }
-    else {
-        return
-    }
+    let formContent = getForm(forms[form_name]);
 
     let buttons = document.getElementsByClassName('buttons');
         buttonsClone = buttons[0].cloneNode(true);
