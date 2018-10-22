@@ -26,8 +26,9 @@ def register_user(registration_form):
     """
 
     result = {'status': True, 'message': 'Successfully registered!'}
-    add_user = dh.add_player(registration_form)
-    if not add_user:
+    add_user_state = dh.add_player(registration_form)
+
+    if not add_user_state:
         result['status'] = False
         result['message'] = 'Username already exists.'
 
@@ -45,11 +46,11 @@ def login_user(login_form):
     """
 
     player_name = login_form['username']
-    check_player_name = dh.get_player(player_name)
+    check_player_existance = dh.get_player(player_name)
 
-    if check_player_name:
+    if check_player_existance:
         form_password = login_form.get('password')
-        player_password = dh.get_players_password(player_name)
+        player_password = dh.get_player_password(player_name)
 
         if check_password_hash(player_password, form_password):
             session['player_name'] = player_name

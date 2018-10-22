@@ -10,17 +10,19 @@ def get_player(cursor, player_name):
 
     cursor.execute(SQL, (player_name,))
     result = cursor.fetchone()
+
     return result
 
 
 @dbc.connection_handler
-def get_players_password(cursor, player_name):
+def get_player_password(cursor, player_name):
     SQL = (f'SELECT password '
            f'FROM players '
            f"WHERE player_name='{player_name}';")
 
     cursor.execute(SQL, (player_name,))
     result = cursor.fetchone()
+
     return result.get('password')
 
 
@@ -35,6 +37,10 @@ def add_player(cursor, registration_form):
                f"VALUES ('{player_name}', '{password}');")
 
         cursor.execute(SQL, (player_name, password))
-        return True
+        operation_state = True
+
     else:
-        return False
+        operation_state = False
+
+    return operation_state
+

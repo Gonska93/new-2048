@@ -146,7 +146,7 @@ ul li:nth-child(1):hover a {
     margin: 0 0%;
     width: 80%;
     height: 100%;
-    background-color: orange;
+    background-color: rgba(255, 166, 0, 0);
 }
 
 #game-board table {
@@ -155,7 +155,7 @@ ul li:nth-child(1):hover a {
 
 #game-board td{
     border: 2px solid rgb(207, 103, 42);
-    background-color: rgba(248, 158, 158, 0.472);
+    background-color: rgba(248, 158, 158, 0.288);
     width: 25%;
     height: 11.8rem;
     border-radius: 15px;
