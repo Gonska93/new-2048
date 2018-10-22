@@ -1,6 +1,8 @@
 from flask import session, redirect, url_for, flash
 from functools import wraps
-from werkzeug.security import check_password_hash
+from werkzeug.security import check_password_hash, generate_password_hash
+
+from util import USERNAME_LENGTH_RANGE
 from data import data_handler as dh
 
 
@@ -26,11 +28,16 @@ def register_user(registration_form):
     """
 
     result = {'status': True, 'message': 'Successfully registered!'}
-    add_user_state = dh.add_player(registration_form)
-
-    if not add_user_state:
+    username = registration_form['username']
+    if username in dh.get_all_usernames():
         result['status'] = False
-        result['message'] = 'Username already exists.'
+        result['message'] = 'Username already taken!'
+    elif len(username) not in USERNAME_LENGTH_RANGE:
+        result['status'] = False
+        result['message'] = 'Username too long!'
+    else:
+        registration_form['password'] = generate_password_hash(registration_form['password'])
+        dh.add_player(registration_form)
 
     return result
 
