@@ -4,7 +4,7 @@ let forms = {'loginForm': { submitButtonName: 'login',
             'registerForm': {submitButtonName: 'register',
                     submitButtonContent: 'Register',
                     action: '/register'}
-}
+};
 
 function getForm(form) {
         return `<form id="form" method="POST" action="${form.action}">
@@ -22,10 +22,10 @@ function getForm(form) {
 }
 
 function insertMainButtons() {
-    var getLoginForm = document.getElementById('form');
+    let getLoginForm = document.getElementById('form');
         getLoginForm.remove();
 
-    var menuContent = document.getElementById('menu-content');
+    let menuContent = document.getElementById('menu-content');
         menuContent.appendChild(buttonsClone);
 }
 

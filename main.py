@@ -27,7 +27,7 @@ def register():
 @app.route('/game')
 @uh.authenticate_user
 def game():
-    return render_template('gameplay.html', game=game)
+    return render_template('gameplay.html')
 
 
 @app.route('/logout')
