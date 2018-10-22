@@ -32,6 +32,7 @@ def game():
 
 
 @app.route('/logout')
+@uh.authenticate_user
 def logout():
     session.clear()
     return redirect(url_for('main'))
