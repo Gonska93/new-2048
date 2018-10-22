@@ -112,20 +112,19 @@ ul li:nth-child(1):hover a {
     width: 30%;
 }
 
-#message-fail {
-    background-color: red;
+.message {
     border-radius: 15px;
     width: 50%;
-    text-align: center;
     margin-left: 25%;
+    text-align: center;
 }
 
-#message-success {
+.True {
     background-color: rgb(0, 255, 0);
-    border-radius: 15px;
-    width: 50%;
-    margin-left: 25%;
-    text-align: center;
+}
+
+.False {
+    background-color: red;
 }
 
 
