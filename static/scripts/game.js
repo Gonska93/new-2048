@@ -176,7 +176,7 @@ const gameplay = {
                     temporary_list.push(element);
                 }
                 else {
-                    counter = counter + 1;
+                    counter++;
                 }
             }
             for (let i = 0; i < counter; i++) {
@@ -205,14 +205,11 @@ const gameplay = {
         }
     },
     rotateBoard: function (game_board) {
-        let result = [],
-            row, 
-            column,
-            temp;
+        let result = [];
 
-        for (column = 0; column < 4; column++) {
-            temp = [];
-            for (row = 0; row < 4; row++) {
+        for (let column = 0; column < 4; column++) {
+            let temp = [];
+            for (let row = 0; row < 4; row++) {
                 temp.push(game_board[row][column])
             }
             result.push(temp);
@@ -224,7 +221,7 @@ const gameplay = {
     reverseBoard: function (game_board) {
         let result = [];
 
-        for (row of game_board) {
+        for (let row of game_board) {
             result.push(row.reverse());
         }
         return result;
@@ -244,11 +241,10 @@ const gameplay = {
     },
 
     checkAnyMovementAvailability: function (board_name) {
-        let movements = [this.constant.left, this.constant.up, this.constant.right, this.constant.down],
-            copy = [];
+        let movements = [this.constant.left, this.constant.up, this.constant.right, this.constant.down];
 
         for (let mov of movements) {
-            copy = [];
+            let copy = [];
             for (let row of board_name) {
                 copy.push(row.slice());
             }
