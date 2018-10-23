@@ -30,6 +30,46 @@ document.onkeydown = function(ev) {
     }
 };
 
+let timer = {
+    value: 0,
+
+    state: 0,
+
+    running: null,
+
+    startTimer: function() {
+       this.running = setInterval(this.increase, 1000);
+    },
+
+    stopTimer: function() {
+        clearInterval(this.running);
+        this.value = 0;
+        timer.refresh();
+    },
+
+    convertTime: function(secondsAmount) {
+        let hours = Math.floor(secondsAmount/(3600)).toString(), 
+            minutes = Math.floor(secondsAmount/60 % 60).toString(), 
+            seconds = (secondsAmount%60).toString(),
+            convertedHours = (hours.length < 2) ? `0${hours}`:hours,
+            convertedMinutes = (minutes.length < 2) ? `0${minutes}`:minutes,
+            convertedSeconds = (seconds.length < 2) ? `0${seconds}`:seconds;
+        
+        return `H:${convertedHours} M:${convertedMinutes} S:${convertedSeconds}`
+    },
+
+    increase: function() {
+        timer.value += 1;
+        timer.refresh();
+    },
+
+    refresh: function() {
+        $('#timer').text(timer.convertTime(timer.value));
+    }
+};
+
+
+
 const gameplay = {
     gameBoard: [[0, 0, 0, 0],
                 [0, 0, 0, 0],
