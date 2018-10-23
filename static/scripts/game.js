@@ -30,9 +30,10 @@ document.onkeydown = function(ev) {
     }
 };
 
+
 let timer = {
     value: 0,
-
+    existance: false,
     running: null,
 
     startTimer: function() {
