@@ -41,7 +41,8 @@ const gameplay = {
             'C1', 'C2', 'C3', 'C4',
             'D1', 'D2', 'D3', 'D4'],
 
-    colors: {'': 'white', 2: 'orange', 4: 'yellow', 8: 'green', 16: 'blue', 32: 'purple', 64: 'lightgreen', 128: 'aqua', 256: 'lightblue', 512: 'lightgreen',
+    colors: {'': 'white', 2: 'orange', 4: 'yellow', 8: 'green', 16: 'blue', 32: 'purple',
+            64: 'lightgreen', 128: 'aqua', 256: 'lightblue', 512: 'lightgreen',
             1024: 'red', 2048: 'brown'},
 
     constant: {'zero': 0, 'one': 1, 'two': 2, 'four': 4, 'left': 1, 'up': 2, 'right': 3, 'down': 4},
@@ -164,7 +165,7 @@ const gameplay = {
         return game_board
     },
 
-    // defult - moving tiles to left side
+    // default - moving tiles to left side
     reduceZeros: function (game_board) {
         let result = [];
         for (let row of game_board) {
