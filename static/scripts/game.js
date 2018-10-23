@@ -57,6 +57,8 @@ const gameplay = {
             $('#timer').text(gameplay.convertTime(gameplay.timer));
         }, 1000)
     },
+    
+    winningConditions: {},
 
     convertTime: function(secondsAmount) {
         let hours = Math.floor(secondsAmount/(60*60)).toString(), 
@@ -67,6 +69,10 @@ const gameplay = {
             convertedSeconds = (seconds.length < 2) ? `0${seconds}`:seconds;
         
         return `H:${convertedHours} M:${convertedMinutes} S:${convertedSeconds}`
+    },
+
+    getWinningConditions: function(mode) {
+        return
     },
 
     refreshGameBoard: function (game_board) {
