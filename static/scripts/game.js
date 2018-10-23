@@ -89,24 +89,10 @@ const gameplay = {
 
     started: false,
 
-    timer: 0,
+    score: 0,
 
-    startTimer: function() {
-        setInterval(() =>  {
-            gameplay.timer += 1;
-            $('#timer').text(gameplay.convertTime(gameplay.timer));
-        }, 1000)
-    },
-
-    convertTime: function(secondsAmount) {
-        let hours = Math.floor(secondsAmount/(60*60)).toString(), 
-            minutes = Math.floor(secondsAmount/60).toString(), 
-            seconds = (secondsAmount%60).toString(),
-            convertedHours = (hours.length < 2) ? `0${hours}`:hours,
-            convertedMinutes = (minutes.length < 2) ? `0${minutes}`:minutes,
-            convertedSeconds = (seconds.length < 2) ? `0${seconds}`:seconds;
-        
-        return `H:${convertedHours} M:${convertedMinutes} S:${convertedSeconds}`
+    refreshScore: function() {
+        $('#score').text(gameplay.score);
     },
 
     refreshGameBoard: function (game_board) {
@@ -155,7 +141,7 @@ const gameplay = {
         this.gameBoard = this.insertRandomTile(this.gameBoard);
         this.gameBoard = this.insertRandomTile(this.gameBoard);
         this.started = true;
-        this.startTimer();
+        timer.startTimer();
         this.refreshGameBoard(this.gameBoard);
     },
 
@@ -166,6 +152,9 @@ const gameplay = {
        
         this.gameBoard = [[0,0,0,0],[0,0,0,0],[0,0,0,0],[0,0,0,0]];
         gameplay.started = false;
+        gameplay.score = 0;
+        gameplay.refreshScore();
+        timer.stopTimer();
         gameplay.refreshGameBoard(this.gameBoard);
     },
 
@@ -203,6 +192,7 @@ const gameplay = {
 
             game_board = this.reduceZeros(game_board);
             this.sumTiles(game_board);
+            this.refreshScore();
             game_board = this.reduceZeros(game_board);
 
             switch (movement_direction) { //Rotate/reverse back the game_board and do comparison.
@@ -265,14 +255,17 @@ const gameplay = {
     sumTiles: function (game_board) {
         for (let row of game_board) {
             if ((row[0] === row[1]) && (row[0] !== this.constant.zero)) {
+                gameplay.score += row[0];
                 row[0] = row[0]*this.constant.two;
                 row[1] = this.constant.zero;
             }
             else if ((row[1] === row[2]) && (row[1] !== this.constant.zero)) {
+                gameplay.score += row[1];
                 row[1] = row[1]*this.constant.two;
                 row[2] = this.constant.zero;
             }
             else if ((row[2] === row[3]) && (row[2] !== this.constant.zero)) {
+                gameplay.score += row[2];
                 row[2] = row[2]*this.constant.two;
                 row[3] = this.constant.zero;
             }
