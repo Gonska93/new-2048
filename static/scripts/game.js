@@ -72,7 +72,7 @@ const gameplay = {
     },
 
     insertRandomTile: function (game_board) {
-        let pair = [this.getRandom(0,3), this.getRandom(0,3)],;
+        let pair = [this.getRandom(0,3), this.getRandom(0,3)],
             flatBoard = game_board.flat();
 
         if (flatBoard.indexOf(0) > -1) {
@@ -88,7 +88,7 @@ const gameplay = {
 
     startGame: function() {
         let startButton = document.getElementById('start-button');
-        startButton.addEventListener('click', this.resetProgress);
+        startButton.setAttribute('onclick', 'gameplay.resetProgress()');
         startButton.innerHTML = 'Reset';
 
         this.gameBoard = this.insertRandomTile(this.gameBoard);
@@ -100,7 +100,7 @@ const gameplay = {
     resetProgress: function () {
         let startButton = document.getElementById('start-button');
         startButton.innerHTML = 'Start Game';
-        startButton.addEventListener("click", this.startGame);
+        startButton.setAttribute('onclick', 'gameplay.startGame()');
        
         this.gameBoard = [[0,0,0,0],[0,0,0,0],[0,0,0,0],[0,0,0,0]];
         this.started = true;
