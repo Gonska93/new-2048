@@ -1,11 +1,13 @@
 from flask import Flask, request, redirect, render_template, url_for, session, flash
 from logic import user_handler as uh
 
+
 app = Flask(__name__)
 
 
 @app.route('/')
 def main():
+
     return render_template('main.html')
 
 
@@ -14,6 +16,7 @@ def login():
     form_dict = request.form.to_dict()
     result = uh.login_user(form_dict)
     flash(result['message'], result['status'])
+
     return redirect(url_for('main'))
 
 
@@ -22,12 +25,14 @@ def register():
     form_dict = request.form.to_dict()
     result = uh.register_user(form_dict)
     flash(result['message'], result['status'])
+
     return redirect(url_for('main'))
 
 
 @app.route('/game')
 @uh.authenticate_user
 def game():
+
     return render_template('gameplay.html')
 
 
@@ -35,6 +40,7 @@ def game():
 @uh.authenticate_user
 def logout():
     session.clear()
+
     return redirect(url_for('main'))
 
 
