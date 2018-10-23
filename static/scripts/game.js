@@ -100,11 +100,11 @@ const gameplay = {
 
     resetProgress: function () {
         let startButton = document.getElementById('start-button');
-        startButton.innerHTML = 'Start Game';
         startButton.setAttribute('onclick', 'gameplay.startGame()');
+        startButton.innerHTML = 'Start Game';
        
         this.gameBoard = [[0,0,0,0],[0,0,0,0],[0,0,0,0],[0,0,0,0]];
-        this.started = true;
+        gameplay.started = false;
         gameplay.refreshGameBoard(this.gameBoard);
     },
 
