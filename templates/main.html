@@ -12,7 +12,7 @@
 		<div class="buttons">
 			<ul>
                 {% for mode in gamemodes %}
-				    <li><a href="{{ url_for('game', mode=mode) }}" onclick="startGame()" class="btn">{{ mode.capitalize() }} Mode</a></li>
+				    <li><a href="{{ url_for('game', mode=mode) }}" class="btn">{{ mode.capitalize() }} Mode</a></li>
                 {% endfor %}
 				<li><a href="{{ url_for('logout') }}" class="btn">Logout</a></li>
 			</ul>

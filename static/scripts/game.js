@@ -41,9 +41,11 @@ let timer = {
     },
 
     stopTimer: function() {
-        clearInterval(this.running);
-        this.value = 0;
-        timer.refresh();
+        (gameplay.gameMode == 'ranked') ?
+            (clearInterval(this.running),
+            this.value = 0,
+            timer.refresh()):
+            null
     },
 
     convertTime: function(secondsAmount) {
@@ -86,7 +88,16 @@ const gameplay = {
     constant: {'zero': 0, 'one': 1, 'two': 2, 'four': 4, 'left': 1, 'up': 2, 'right': 3, 'down': 4},
 
     started: false,
-    
+
+    gameMode: location.pathname.split("/").pop(),
+
+    timerInit: document.addEventListener("DOMContentLoaded", ()=> {(gameplay.gameMode == 'ranked') ? 
+                (
+                $('#game-buttons').prepend($('<div id="timer"></div>')),
+                timer.refresh()
+                )
+              : null}),
+
     score: 0,
 
     refreshScore: function() {
@@ -145,7 +156,7 @@ const gameplay = {
         this.gameBoard = this.insertRandomTile(this.gameBoard);
         this.gameBoard = this.insertRandomTile(this.gameBoard);
         this.started = true;
-        timer.startTimer();
+        (gameplay.gameMode == 'ranked') ? timer.startTimer(): null
         this.refreshGameBoard(this.gameBoard);
     },
 
@@ -158,7 +169,7 @@ const gameplay = {
         gameplay.started = false;
         gameplay.score = 0;
         gameplay.refreshScore();
-        timer.stopTimer();
+        (gameplay.gameMode == 'ranked') ? timer.stopTimer(): null
         gameplay.refreshGameBoard(this.gameBoard);
     },
 
