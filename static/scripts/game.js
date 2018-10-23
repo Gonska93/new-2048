@@ -19,7 +19,7 @@ document.onkeydown = function(ev) {
                 gameplay.gameBoard = gameplay.movement(4, gameplay.gameBoard);
                 break;
 
-                default: return; // exit this handler for other keys
+                //default: return; // exit this handler for other keys
             }
             gameplay.refreshGameBoard(gameplay.gameBoard);
             ev.preventDefault(); // prevent the default action (scroll / move caret)
