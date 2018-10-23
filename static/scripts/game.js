@@ -115,6 +115,7 @@ const gameplay = {
         this.gameBoard = this.insertRandomTile(this.gameBoard);
         this.gameBoard = this.insertRandomTile(this.gameBoard);
         this.started = true;
+        this.startTimer();
         this.refreshGameBoard(this.gameBoard);
     },
 
