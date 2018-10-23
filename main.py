@@ -1,5 +1,6 @@
 from flask import Flask, request, redirect, render_template, url_for, session, flash
 from logic import user_handler as uh
+from util import GAME_MODES
 
 
 app = Flask(__name__)
@@ -8,7 +9,7 @@ app = Flask(__name__)
 @app.route('/')
 def main():
 
-    return render_template('main.html')
+    return render_template('main.html', gamemodes=GAME_MODES)
 
 
 @app.route('/login', methods=['POST'])
@@ -29,11 +30,11 @@ def register():
     return redirect(url_for('main'))
 
 
-@app.route('/game')
+@app.route('/game/<mode>')
 @uh.authenticate_user
-def game():
+def game(mode):
 
-    return render_template('gameplay.html')
+    return render_template('gameplay.html', gamemode=mode)
 
 
 @app.route('/logout')

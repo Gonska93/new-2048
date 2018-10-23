@@ -11,7 +11,9 @@
 		<div>Logged as {{ session['player_name'] }}</div>
 		<div class="buttons">
 			<ul>
-				<li><a href="{{ url_for('game') }}" onclick="startGame()" class="btn">Play</a></li>
+                {% for mode in gamemodes %}
+				    <li><a href="{{ url_for('game', mode=mode) }}" onclick="startGame()" class="btn">{{ mode.capitalize() }} Mode</a></li>
+                {% endfor %}
 				<li><a href="{{ url_for('logout') }}" class="btn">Logout</a></li>
 			</ul>
 		</div>
