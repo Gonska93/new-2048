@@ -35,7 +35,7 @@ def add_player(cursor, registration_form):
 
 @dbc.connection_handler
 def get_all_usernames(cursor):
-    SQL = ("SELECT player_name FROM players;")
+    SQL = "SELECT player_name FROM players;"
     cursor.execute(SQL)
     result = cursor.fetchall()
     return [row['player_name'] for row in result]
