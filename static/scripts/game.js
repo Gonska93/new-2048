@@ -33,8 +33,6 @@ document.onkeydown = function(ev) {
 let timer = {
     value: 0,
 
-    state: 0,
-
     running: null,
 
     startTimer: function() {
@@ -69,7 +67,6 @@ let timer = {
 };
 
 
-
 const gameplay = {
     gameBoard: [[0, 0, 0, 0],
                 [0, 0, 0, 0],
@@ -88,11 +85,17 @@ const gameplay = {
     constant: {'zero': 0, 'one': 1, 'two': 2, 'four': 4, 'left': 1, 'up': 2, 'right': 3, 'down': 4},
 
     started: false,
-
+    
     score: 0,
 
     refreshScore: function() {
         $('#score').text(gameplay.score);
+    },
+
+    winningConditions: {},
+
+    getWinningConditions: function(mode) {
+        return
     },
 
     refreshGameBoard: function (game_board) {
@@ -192,7 +195,7 @@ const gameplay = {
 
             game_board = this.reduceZeros(game_board);
             this.sumTiles(game_board);
-            this.refreshScore();
+            gameplay.refreshScore();
             game_board = this.reduceZeros(game_board);
 
             switch (movement_direction) { //Rotate/reverse back the game_board and do comparison.
@@ -255,17 +258,17 @@ const gameplay = {
     sumTiles: function (game_board) {
         for (let row of game_board) {
             if ((row[0] === row[1]) && (row[0] !== this.constant.zero)) {
-                gameplay.score += row[0];
+                gameplay.score += 1;
                 row[0] = row[0]*this.constant.two;
                 row[1] = this.constant.zero;
             }
             else if ((row[1] === row[2]) && (row[1] !== this.constant.zero)) {
-                gameplay.score += row[1];
+                gameplay.score += 1;
                 row[1] = row[1]*this.constant.two;
                 row[2] = this.constant.zero;
             }
             else if ((row[2] === row[3]) && (row[2] !== this.constant.zero)) {
-                gameplay.score += row[2];
+                gameplay.score += 1;
                 row[2] = row[2]*this.constant.two;
                 row[3] = this.constant.zero;
             }
