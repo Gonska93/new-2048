@@ -3,7 +3,8 @@ let forms = {'loginForm': { submitButtonName: 'login',
                   action: '/login'},
             'registerForm': {submitButtonName: 'register',
                     submitButtonContent: 'Register',
-                    action: '/register'}
+                    action: '/register'},
+            mainButtons: null
 };
 
 function getForm(form) {
@@ -22,11 +23,12 @@ function getForm(form) {
 }
 
 function insertMainButtons() {
+    $('#form').remove()
     let getLoginForm = document.getElementById('form');
         getLoginForm.remove();
-
+    $('#menu-content').appendChild()
     let menuContent = document.getElementById('menu-content');
-        menuContent.appendChild(buttonsClone);
+        menuContent.appendChild(forms.mainButtons);
 }
 
 
@@ -34,7 +36,7 @@ function insertForm(form_name) {
     let formContent = getForm(forms[form_name]);
 
     let buttons = document.getElementsByClassName('buttons');
-        buttonsClone = buttons[0].cloneNode(true);
+        forms.mainButtons = buttons[0].cloneNode(true);
         buttons[0].remove();
 
     let menuContent = document.getElementById('menu-content');

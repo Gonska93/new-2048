@@ -72,8 +72,8 @@ const gameplay = {
     },
 
     insertRandomTile: function (game_board) {
-        let pair = [this.getRandom(0,3), this.getRandom(0,3)];
-        let flatBoard = game_board.flat();
+        let pair = [this.getRandom(0,3), this.getRandom(0,3)],;
+            flatBoard = game_board.flat();
 
         if (flatBoard.indexOf(0) > -1) {
             while (game_board[pair[0]][pair[1]] !== this.constant.zero) {
@@ -109,6 +109,7 @@ const gameplay = {
 
     round: function (value, precision) {
         let multiplier = Math.pow(10, precision || 0);
+
         return Math.round(value * multiplier) / multiplier;
     },
 
@@ -116,18 +117,22 @@ const gameplay = {
         let movement = {1: 'left',
                         2: 'up',
                         3: 'right',
-                        4: 'down'}
-        
-        let boardBeforeMovement = game_board.slice();
+                        4: 'down'},
+            boardBeforeMovement = game_board.slice(),
+            comparison;
 
-        if (movement_direction in movement) {
+        if (movement_direction in movement) { // Rotate/reverse the game_board to make the movement
+
             switch (movement_direction) {
+
                 case this.constant.up:
                     game_board = this.rotateBoard(game_board);
                     break;
+
                 case this.constant.right:
                     game_board = this.reverseBoard(game_board);
                     break;
+    
                 case this.constant.down:
                     game_board = this.rotateBoard(game_board);
                     game_board = this.reverseBoard(game_board);
@@ -138,21 +143,24 @@ const gameplay = {
             this.sumTiles(game_board);
             game_board = this.reduceZeros(game_board);
 
-            let comparison;
-            switch (movement_direction) {
+            switch (movement_direction) { //Rotate/reverse back the game_board and do comparison.
+
                 case this.constant.up:
                     game_board = this.rotateBoard(game_board);
                     comparison = this.arraysEqual(boardBeforeMovement, game_board);
                     break;
+        
                 case this.constant.right:
                     comparison = this.arraysEqual(boardBeforeMovement,game_board);
                     game_board = this.reverseBoard(game_board);
                     break;
+    
                 case this.constant.down:
                     game_board = this.rotateBoard(game_board);
                     game_board = game_board.reverse();
                     comparison = this.arraysEqual(boardBeforeMovement, game_board);
                     break;
+
                 case this.constant.left:
                     comparison = this.arraysEqual(boardBeforeMovement, game_board);
                     break;
@@ -166,22 +174,27 @@ const gameplay = {
 
     // defult - moving tiles to left side
     reduceZeros: function (game_board) {
-        let result = [];
-        for (let row of game_board) {
-            let counter = 0;
-            let temporary_list = [];
-            for (let element of row) {
-                if (element !== 0) {
-                    temporary_list.push(element);
-                }
-                else {
-                    counter++;
-                }
+        let result = [],
+            counter,
+            temporary_list,
+            row,
+            element,
+            i;
+
+        for (row of game_board) {
+            counter = 0;
+            temporary_list = [];
+
+            for (element of row) {
+                (element !== 0) ? temporary_list.push(element): counter++;
             }
-            for (let i = 0; i < counter; i++) {
+
+            for (i = 0; i < counter; i++) {
                 temporary_list.push(0);
             }
+
             result.push(temporary_list);
+
         }
         return result;
     },
@@ -203,14 +216,20 @@ const gameplay = {
             }
         }
     },
-    rotateBoard: function (game_board) {
-        let result = [];
 
-        for (let column = 0; column < 4; column++) {
-            let temp = [];
-            for (let row = 0; row < 4; row++) {
+    rotateBoard: function (game_board) {
+        let result = [],
+            column,
+            temp,
+            row;
+
+        for (column = 0; column < 4; column++) {
+            temp = [];
+
+            for (row = 0; row < 4; row++) {
                 temp.push(game_board[row][column])
             }
+
             result.push(temp);
         }
         return result;
@@ -218,11 +237,13 @@ const gameplay = {
 
     // reverse all elements inside rows
     reverseBoard: function (game_board) {
-        let result = [];
+        let result = [],
+            row;
 
-        for (let row of game_board) {
+        for (row of game_board) {
             result.push(row.reverse());
         }
+
         return result;
     },
 
@@ -240,15 +261,20 @@ const gameplay = {
     },
 
     checkAnyMovementAvailability: function (board_name) {
-        let movements = [this.constant.left, this.constant.up, this.constant.right, this.constant.down];
+        let movements = [this.constant.left, this.constant.up, this.constant.right, this.constant.down],
+            mov,
+            copy,
+            row;
 
-        for (let mov of movements) {
-            let copy = [];
-            for (let row of board_name) {
+        for (mov of movements) {
+            copy = [];
+
+            for (row of board_name) {
                 copy.push(row.slice());
             }
-            if (!(this.arraysEqual(board_name, this.movement(mov, copy)))) {
-                return true;
+            
+            if (!(this.arraysEqual(board_name, this.movement(mov, copy)))) { // if during comparing following movement condition returns true
+                return true;                                                 // don't check any other movements instantly return true
             }
         }
         return false;
