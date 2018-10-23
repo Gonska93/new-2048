@@ -49,6 +49,26 @@ const gameplay = {
 
     started: false,
 
+    timer: 0,
+
+    startTimer: function() {
+        setInterval(() =>  {
+            gameplay.timer += 1;
+            $('#timer').text(gameplay.convertTime(gameplay.timer));
+        }, 1000)
+    },
+
+    convertTime: function(secondsAmount) {
+        let hours = Math.floor(secondsAmount/(60*60)).toString(), 
+            minutes = Math.floor(secondsAmount/60).toString(), 
+            seconds = (secondsAmount%60).toString(),
+            convertedHours = (hours.length < 2) ? `0${hours}`:hours,
+            convertedMinutes = (minutes.length < 2) ? `0${minutes}`:minutes,
+            convertedSeconds = (seconds.length < 2) ? `0${seconds}`:seconds;
+        
+        return `H:${convertedHours} M:${convertedMinutes} S:${convertedSeconds}`
+    },
+
     refreshGameBoard: function (game_board) {
         let displayBoard = game_board.flat(),
             toInsert;
