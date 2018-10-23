@@ -4,7 +4,12 @@ let forms = {'loginForm': { submitButtonName: 'login',
             'registerForm': {submitButtonName: 'register',
                     submitButtonContent: 'Register',
                     action: '/register'},
-            mainButtons: null
+            mainButtons: `<div class="buttons">
+                            <ul>
+                                <li><a onclick="insertForm('loginForm')" class="btn">Login</a></li>
+                                <li><a onclick="insertForm('registerForm')" class="btn">Register</a></li>
+                            </ul>
+                        </div>`
 };
 
 function getForm(form) {
@@ -23,12 +28,8 @@ function getForm(form) {
 }
 
 function insertMainButtons() {
-    $('#form').remove()
-    let getLoginForm = document.getElementById('form');
-        getLoginForm.remove();
-    $('#menu-content').appendChild()
-    let menuContent = document.getElementById('menu-content');
-        menuContent.appendChild(forms.mainButtons);
+    $('#form').remove();
+    $('#menu-content').append(forms.mainButtons);
 }
 
 
