@@ -57,6 +57,9 @@ def save_new_game(cursor, game_state, title,  player_id):
 
     cursor.execute(sql, {'player_id': player_id, 'game_state': game_state, 'save_title': title})
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> Created route for retrieving saved games
 
 
 @dbc.connection_handler
@@ -69,5 +72,8 @@ def get_saved_states(cursor, user_id):
     result = cursor.fetchall()
 
     return result
+<<<<<<< HEAD
 =======
 >>>>>>> Added two new query functions
+=======
+>>>>>>> Created route for retrieving saved games

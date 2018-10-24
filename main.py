@@ -80,6 +80,9 @@ def save_data():
     data = request.get_json()
     result = dl.save_game(data, session['player_name'])
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> Created route for retrieving saved games
     
     return jsonify(result)
 
@@ -89,9 +92,12 @@ def save_data():
 def get_saved_games():
     result = dl.get_saved_games_by_user(session['player_name'])
 
+<<<<<<< HEAD
     return jsonify(result)
 >>>>>>> Added new route for handling ajax POST requests
 =======
+=======
+>>>>>>> Created route for retrieving saved games
     return jsonify(result)
 >>>>>>> Added new route for handling ajax POST requests
 
