@@ -2,8 +2,11 @@
 	
 {% block title %}Game {% endblock %}
 
+{% block head %}<script src="{{ url_for('static', filename='scripts/game.js') }}" defer></script>{% endblock %}
+
+
 {% block content %}
-    <div id="mode" data-mode="{{ gamemode }}">{{ gamemode.capitalize() }} mode</div>
+    <div id="mode" data-mode="{{ gamemode }}" data-timer="5000">{{ gamemode.capitalize() }} mode</div>
 	<div id="game-board">
 		<table>
 

@@ -32,20 +32,18 @@ document.onkeydown = function(ev) {
 
 
 let timer = {
-    value: 0,
+    value: $('#mode').data('timer'),
     existence: false,
     running: null,
 
-    startTimer: function() {
-       this.running = setInterval(this.increase, 1000);
+    startTimer: function(countdown=false) {
+       this.running = setInterval(this.timeStep, 1000, countdown);
     },
 
     stopTimer: function() {
-        (gameplay.gameMode === 'ranked') ?
-            (clearInterval(this.running),
-            this.value = 0,
-            timer.refresh()):
-            null
+        clearInterval(this.running);
+        this.value = $('#mode').data('timer');
+        timer.refresh();
     },
 
     convertTime: function(secondsAmount) {
@@ -59,13 +57,17 @@ let timer = {
         return `H:${convertedHours} M:${convertedMinutes} S:${convertedSeconds}`
     },
 
-    increase: function() {
-        timer.value += 1;
-        timer.refresh();
+    timeStep: function(countdown) {
+    (countdown) ? timer.value -= 1 : timer.value += 1;
+    timer.refresh();
     },
 
     refresh: function() {
         $('#timer').text(timer.convertTime(timer.value));
+    },
+
+    init: function () {
+        $('#game-buttons').prepend($(`<div id="timer">${this.convertTime(this.value)}</div>`));
     }
 };
 
@@ -90,14 +92,7 @@ const gameplay = {
     started: false,
 
     gameMode: $('#mode').data('mode'),
-
-    timerInit: document.addEventListener("DOMContentLoaded", ()=> {(gameplay.gameMode === 'ranked') ?
-                (
-                $('#game-buttons').prepend($('<div id="timer"></div>')),
-                timer.refresh()
-                )
-              : null}),
-
+    
     score: 0,
 
     gameSettings: {},
@@ -110,7 +105,8 @@ const gameplay = {
     getGameSettings: function(mode) {
         return {
             maxTile: (mode === 'classic') ? false : 2048,
-            timerOn: (mode !== 'classic')
+            timerOn: (mode !== 'classic'),
+            isCountdown: (mode === 'time-attack')
         }
     },
 
@@ -152,16 +148,21 @@ const gameplay = {
         return game_board
     },
 
-    startGame: function() {
+    init: function() {
         this.gameSettings = this.getGameSettings(this.gameMode);
+        if (this.gameSettings.timerOn) timer.init();
+    },
+
+    startGame: function() {
         let startButton = document.getElementById('start-button');
         startButton.setAttribute('onclick', 'gameplay.resetProgress()');
         startButton.innerHTML = 'Reset';
-
         this.gameBoard = this.insertRandomTile(this.gameBoard);
         this.gameBoard = this.insertRandomTile(this.gameBoard);
         this.started = true;
-        (this.gameSettings.timerOn) ? timer.startTimer(): null;
+        if (this.gameSettings.timerOn) {
+         timer.startTimer(this.gameSettings.isCountdown);
+        }
         this.refreshGameBoard(this.gameBoard);
     },
 
@@ -174,7 +175,7 @@ const gameplay = {
         gameplay.started = false;
         gameplay.score = 0;
         gameplay.refreshScore();
-        (gameplay.gameMode === 'ranked') ? timer.stopTimer(): null;
+        if (gameplay.gameSettings.timerOn) timer.stopTimer();
         gameplay.refreshGameBoard(this.gameBoard);
     },
 
@@ -357,3 +358,5 @@ const gameplay = {
         return false;
     }
 };
+
+gameplay.init();
