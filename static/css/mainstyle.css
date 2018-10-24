@@ -165,3 +165,28 @@ ul li:nth-child(1):hover a {
     margin-left: 80%;
     margin-top: -800px;
 }
+
+#chat-container {
+    width: 20%;
+    margin-left: 82%;
+    background-color: white;
+    border: 3px solid grey;
+    border-radius: 5px;
+    height: 60%;
+}
+
+#chat-container #chat-input {
+    margin: auto;
+}
+
+#chat-input input {
+    width: 90%;
+}
+
+#chat-messages {
+    margin: auto;
+    height: 40vh;
+    width: 90%;
+    background-color: lightgray;
+    border: 2px solid gray;
+}
