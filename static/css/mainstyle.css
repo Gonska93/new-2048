@@ -44,7 +44,7 @@ body {
     margin-left: 20%;
 }
 
-.btn:hover {
+.custom-btn:hover {
     cursor: pointer;
 }
 

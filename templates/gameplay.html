@@ -9,7 +9,11 @@
 
 
 {% block content %}
-    <div id="mode" data-mode="{{ gamemode }}" data-timer="5000">{{ gamemode.capitalize() }} mode</div>
+	<div id="mode" 
+		 data-mode="{{ gamemode }}" data-timer={% if gamemode == 'ranked' %}"0"{% else %}"600"{% endif %}>
+		{{ gamemode.capitalize() }} mode
+	</div>
+
 	<div id="game-board">
 		<table>
 

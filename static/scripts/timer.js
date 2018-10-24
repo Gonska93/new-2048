@@ -37,3 +37,4 @@ let timer = {
         $('#game-buttons').prepend($(`<div id="timer">${this.convertTime(this.value)}</div>`));
     }
 };
+
