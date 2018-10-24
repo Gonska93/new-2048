@@ -119,12 +119,17 @@ ul li:nth-child(1):hover a {
     text-align: center;
 }
 
-.True {
+.True, .true {
     background-color: rgb(0, 255, 0);
 }
 
-.False {
+.False, .false {
     background-color: red;
+}
+
+.flashes {
+    position: relative;
+    top: 5px;
 }
 
 
