@@ -48,6 +48,18 @@ function getFlashDiv(result) {
     </div>`
 }
 
+function getSavesDiv() {
+    return `
+    <div id="savesDiv">
+    <h3>Saved games:</h3>
+    </div>`
+}
+
+function getStateButton(state) {
+    return `
+    <button type="button" id="state-${state.id}">${state.save_title}</button></br>`
+}
+
 
 function insertMainButtons() {
     $('#form').remove();
