@@ -104,9 +104,9 @@ const gameplay = {
         $('#score').text(gameplay.score);
     },
 
-    winningConditions: {},
+    gameSettings: {},
 
-    getWinningConditions: function(mode) {
+    getGameSettings: function(mode) {
         return {
             maxTile: (mode === 'classic') ? false : 2048,
             timerOn: (mode !== 'classic')
@@ -152,7 +152,7 @@ const gameplay = {
     },
 
     startGame: function() {
-        this.winningConditions = this.getWinningConditions(this.gameMode);
+        this.gameSettings = this.getGameSettings(this.gameMode);
         let startButton = document.getElementById('start-button');
         startButton.setAttribute('onclick', 'gameplay.resetProgress()');
         startButton.innerHTML = 'Reset';
@@ -160,7 +160,7 @@ const gameplay = {
         this.gameBoard = this.insertRandomTile(this.gameBoard);
         this.gameBoard = this.insertRandomTile(this.gameBoard);
         this.started = true;
-        (this.winningConditions.timerOn) ? timer.startTimer(): null;
+        (this.gameSettings.timerOn) ? timer.startTimer(): null;
         this.refreshGameBoard(this.gameBoard);
     },
 
