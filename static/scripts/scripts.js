@@ -49,22 +49,35 @@ function getFlashDiv(result) {
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 function getSavesDiv() {
     return `
     <div id="savesDiv">
         <h3>Saved games:</h3>
         <ul id="savesDiv-container"></ul>
         <button>Back</button>
+=======
+function getSavesDiv() {
+    return `
+    <div id="savesDiv">
+    <h3>Saved games:</h3>
+>>>>>>> Created necessary dom manipulation for load button.
     </div>`
 }
 
 function getStateButton(state) {
     return `
+<<<<<<< HEAD
     <li><a id="state-${state.id}">${state.save_title}</a></li>`
 }
 
 =======
 >>>>>>> Added dom manipuation for saving data
+=======
+    <button type="button" id="state-${state.id}">${state.save_title}</button></br>`
+}
+
+>>>>>>> Created necessary dom manipulation for load button.
 
 function insertMainButtons() {
     $('#form').remove();
