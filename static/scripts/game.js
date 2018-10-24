@@ -121,6 +121,7 @@ const gameplay = {
         $('#start-button').on('click', gameplay.startGame);
         this.gameSettings = this.getGameSettings(this.gameMode);
         if (this.gameSettings.timerOn) timer.init();
+        $('#saveBtn').on('click', createTitleInput);
     },
 
     startGame: function() {

@@ -48,6 +48,7 @@ function getFlashDiv(result) {
     </div>`
 }
 
+<<<<<<< HEAD
 function getSavesDiv() {
     return `
     <div id="savesDiv">
@@ -62,6 +63,8 @@ function getStateButton(state) {
     <li><a id="state-${state.id}">${state.save_title}</a></li>`
 }
 
+=======
+>>>>>>> Added dom manipuation for saving data
 
 function insertMainButtons() {
     $('#form').remove();
@@ -83,11 +86,14 @@ function insertForm(form_name) {
         backButton.addEventListener("click", function(event) {event.preventDefault()});
 }
 
+<<<<<<< HEAD
 function getLoadBtn() {
     return `
     <a id="loadBtn" class="btn">Load</a>`
 }
 
+=======
+>>>>>>> Added dom manipuation for saving data
 function createTitleInput() {
     $('#saveBtn').replaceWith(getTitleInput());
     $('#sendData').on('click', gameplay.saveGameState);
@@ -96,6 +102,7 @@ function createTitleInput() {
 function flashResult(result) {
     $('.flashes').append(getFlashDiv(result));
     let flashes = $('.message');
+<<<<<<< HEAD
     setTimeout(() => flashes.remove(), 2000);
 }
 
@@ -121,3 +128,7 @@ function restoreLoadBtn() {
     loadButton.on('click', dataHandler.getSavedGames);
     $('#savesDiv').replaceWith(loadButton);
 }
+=======
+    setTimeout(() => flashes.remove(), 3000);
+}
+>>>>>>> Added dom manipuation for saving data
