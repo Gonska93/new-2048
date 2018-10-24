@@ -56,6 +56,7 @@ def save_new_game(cursor, game_state, title,  player_id):
            "VALUES (%(player_id)s, %(save_title)s, %(game_state)s);")
 
     cursor.execute(sql, {'player_id': player_id, 'game_state': game_state, 'save_title': title})
+<<<<<<< HEAD
 
 
 @dbc.connection_handler
@@ -68,3 +69,5 @@ def get_saved_states(cursor, user_id):
     result = cursor.fetchall()
 
     return result
+=======
+>>>>>>> Added two new query functions
