@@ -275,17 +275,17 @@ const gameplay = {
         let temp = game_board.slice();
         for (let row of temp) {
             if ((row[0] === row[1]) && (row[0] !== this.constant.zero)) {
-                (score) ? gameplay.score += 1: null     
+                (score) ? gameplay.score += row[0] * 10: null     
                 row[0] = row[0]*this.constant.two;
                 row[1] = this.constant.zero;
             }
             else if ((row[1] === row[2]) && (row[1] !== this.constant.zero)) {
-                (score) ? gameplay.score += 1: null  
+                (score) ? gameplay.score += row[1] * 10: null  
                 row[1] = row[1]*this.constant.two;
                 row[2] = this.constant.zero;
             }
             else if ((row[2] === row[3]) && (row[2] !== this.constant.zero)) {
-                (score) ? gameplay.score += 1: null 
+                (score) ? gameplay.score += row[2] * 10: null 
                 row[2] = row[2]*this.constant.two;
                 row[3] = this.constant.zero;
             }
