@@ -27,6 +27,28 @@ function getForm(form) {
                             </form>`
 }
 
+function getTitleInput() {
+    return `
+    <div id="saveInput">
+        <label for="saveTitle">Save title:</label>
+        <input type="text" id="saveTitle" />
+        <button id="sendData" type="button">Save game</button>
+    </div>`
+}
+
+function getSaveButton() {
+    return `
+    <a id="saveBtn" class="btn">Save</a>`
+}
+
+function getFlashDiv(result) {
+    return `
+    <div class="message ${result.status}">
+        <h3>${result.message}</h3>
+    </div>`
+}
+
+
 function insertMainButtons() {
     $('#form').remove();
     $('#menu-content').append(forms.mainButtons);
@@ -45,4 +67,15 @@ function insertForm(form_name) {
 
     let backButton = document.getElementById('back-button');
         backButton.addEventListener("click", function(event) {event.preventDefault()});
+}
+
+function createTitleInput() {
+    $('#saveBtn').replaceWith(getTitleInput());
+    $('#sendData').on('click', gameplay.saveGameState);
+}
+
+function flashResult(result) {
+    $('.flashes').append(getFlashDiv(result));
+    let flashes = $('.message');
+    setTimeout(() => flashes.remove(), 3000);
 }
