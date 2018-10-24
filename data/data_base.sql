@@ -15,6 +15,7 @@ CREATE TABLE game (
     id serial NOT NULL,
     player_id integer NOT NULL,
     game_state integer[4][4] NOT NULL,
+    save_title varchar(30) NOT NULL,
     submission_time timestamp without time zone default date_trunc('second', localtimestamp)
 );
 
