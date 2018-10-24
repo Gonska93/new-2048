@@ -13,5 +13,11 @@ let dataHandler = {
         .then(response => response.json())
         .then(result => flashResult(result))
         .catch(err => console.log(err))
+    },
+    getSavedGames: function() {
+        fetch('/get-saved-games')
+        .then(response => response.json())
+        .then(data => displaySavedGames(data.body))
+        .catch(err => console.log(err))
     }
 }
