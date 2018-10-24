@@ -55,6 +55,11 @@ const gameplay = {
 
     gameSettings: {},
 
+    loadState: function(loadedState) {
+        gameplay.gameBoard = loadedState;
+        gameplay.refreshGameBoard(gameplay.gameBoard);
+    },
+
     refreshScore: function() {
         $('#score').text(gameplay.score);
     },
