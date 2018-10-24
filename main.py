@@ -1,7 +1,12 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 from flask import Flask, request, redirect, render_template, url_for, session, flash
 from flask_socketio import SocketIO
 from logic import user_handler as uh
+=======
+from flask import Flask, request, redirect, render_template, url_for, session, flash, jsonify
+from logic import user_handler as uh, data_logic as dl
+>>>>>>> Added new route for handling ajax POST requests
 =======
 from flask import Flask, request, redirect, render_template, url_for, session, flash, jsonify
 from logic import user_handler as uh, data_logic as dl
@@ -55,6 +60,7 @@ def logout():
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 @socketio.on('user_connected')
 def handle_user_connection(json):
     json['message'] = session['player_name'] + ' has connected.'
@@ -66,11 +72,14 @@ def handle_message(json):
     json['player_name'] = session['player_name']
     socketio.emit('response', json)
 =======
+=======
+>>>>>>> Added new route for handling ajax POST requests
 @app.route('/save-game', methods=['POST'])
 @uh.authenticate_user
 def save_data():
     data = request.get_json()
     result = dl.save_game(data, session['player_name'])
+<<<<<<< HEAD
     
     return jsonify(result)
 
@@ -80,6 +89,9 @@ def save_data():
 def get_saved_games():
     result = dl.get_saved_games_by_user(session['player_name'])
 
+    return jsonify(result)
+>>>>>>> Added new route for handling ajax POST requests
+=======
     return jsonify(result)
 >>>>>>> Added new route for handling ajax POST requests
 
