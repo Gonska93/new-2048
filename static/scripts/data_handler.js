@@ -14,13 +14,19 @@ let dataHandler = {
         .then(result => flashResult(result))
         .catch(err => console.log(err))
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> Created ajax function that fetches saved games
     },
     getSavedGames: function() {
         fetch('/get-saved-games')
         .then(response => response.json())
         .then(data => displaySavedGames(data.body))
         .catch(err => console.log(err))
+<<<<<<< HEAD
 =======
 >>>>>>> Added new js module for ajax requests
+=======
+>>>>>>> Created ajax function that fetches saved games
     }
 }
