@@ -81,12 +81,11 @@ const gameplay = {
     },
 
     refreshGameBoard: function (game_board) {
-        let displayBoard = game_board.flat(),
-            toInsert;
+        let displayBoard = game_board.flat()
 
         for (let i = 0; i < this.table.length; i++) {
             $(`#${gameplay.table[i]}`).text(
-                (displayBoard[i]) ? toInsert = displayBoard[i]: toInsert = ''
+                (displayBoard[i]) ? displayBoard[i]: ''
             );
             this.addColors(this.table[i]);
         }
