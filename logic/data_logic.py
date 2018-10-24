@@ -11,3 +11,15 @@ def save_game(data, player_name):
         result['message'] = 'Saving failed!'
 
     return result
+
+
+def get_saved_games_by_user(username):
+    result = {'status': True, 'message': 'Games loaded!', 'body': []}
+    player_id = dh.get_player_id_by_username(username)
+    try:
+        result['body'] = dh.get_saved_states(player_id)
+    except:
+        result['status'] = False
+        result['message'] = 'Loading failed!'
+
+    return result

@@ -50,6 +50,15 @@ def logout():
 def save_data():
     data = request.get_json()
     result = dl.save_game(data, session['player_name'])
+    
+    return jsonify(result)
+
+
+@app.route('/get-saved-games')
+@uh.authenticate_user
+def get_saved_games():
+    result = dl.get_saved_games_by_user(session['player_name'])
+
     return jsonify(result)
 
 
