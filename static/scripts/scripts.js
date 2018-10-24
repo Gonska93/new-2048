@@ -144,4 +144,17 @@ function restoreLoadBtn() {
 =======
     setTimeout(() => flashes.remove(), 3000);
 }
+<<<<<<< HEAD
 >>>>>>> Added dom manipuation for saving data
+=======
+
+function displaySavedGames(states) {
+    let savesDiv = $(getSavesDiv());
+    $('#loadBtn').replaceWith(savesDiv);
+    states.forEach((state) => {
+        let stateButton = $(getStateButton(state));
+        stateButton.on('click', () => gameplay.loadState(state.game_state));
+        savesDiv.append(stateButton);
+    })
+}
+>>>>>>> Created displaySavedGames function
