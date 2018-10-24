@@ -10,6 +10,7 @@ def save_game(data, player_name):
         result['status'] = False
         result['message'] = 'Saving failed!'
 
+<<<<<<< HEAD
     return result
 
 
@@ -23,3 +24,6 @@ def get_saved_games_by_user(username):
         result['message'] = 'Loading failed!'
 
     return result
+=======
+    return result
+>>>>>>> Added new logic module handling data.
