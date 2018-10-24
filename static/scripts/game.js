@@ -100,11 +100,12 @@ const gameplay = {
 
     score: 0,
 
+    gameSettings: {},
+
     refreshScore: function() {
         $('#score').text(gameplay.score);
     },
 
-    gameSettings: {},
 
     getGameSettings: function(mode) {
         return {
