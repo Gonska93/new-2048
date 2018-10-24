@@ -120,7 +120,6 @@ const gameplay = {
     init: function() {
         this.gameSettings = this.getGameSettings(this.gameMode);
         if (this.gameSettings.timerOn) timer.init();
-        $('#saveBtn').on('click', createTitleInput);
     },
 
     startGame: function() {
@@ -130,10 +129,10 @@ const gameplay = {
         this.gameBoard = this.insertRandomTile(this.gameBoard);
         this.gameBoard = this.insertRandomTile(this.gameBoard);
         this.started = true;
-        if (this.gameSettings.timerOn) {
-         timer.startTimer(this.gameSettings.isCountdown);
-        }
+        if (this.gameSettings.timerOn) timer.startTimer(this.gameSettings.isCountdown);
         this.refreshGameBoard(this.gameBoard);
+        $('#saveBtn').on('click', createTitleInput);
+        $('#loadBtn').on('click', dataHandler.getSavedGames);
     },
 
     resetProgress: function () {
