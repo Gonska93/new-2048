@@ -121,10 +121,10 @@ const gameplay = {
         $('#start-button').on('click', gameplay.startGame);
         this.gameSettings = this.getGameSettings(this.gameMode);
         if (this.gameSettings.timerOn) timer.init();
-        $('#saveBtn').on('click', createTitleInput);
     },
 
     startGame: function() {
+<<<<<<< HEAD
         let startButton = $('#start-button'),
             saveBtn = $('#saveBtn'),
             loadBtn = $('#loadBtn');
@@ -145,6 +145,18 @@ const gameplay = {
 
         loadBtn.off('click');
         loadBtn.on('click', dataHandler.getSavedGames);
+=======
+        let startButton = document.getElementById('start-button');
+        startButton.setAttribute('onclick', 'gameplay.resetProgress()');
+        startButton.innerHTML = 'Reset';
+        this.gameBoard = this.insertRandomTile(this.gameBoard);
+        this.gameBoard = this.insertRandomTile(this.gameBoard);
+        this.started = true;
+        if (this.gameSettings.timerOn) timer.startTimer(this.gameSettings.isCountdown);
+        this.refreshGameBoard(this.gameBoard);
+        $('#saveBtn').on('click', createTitleInput);
+        $('#loadBtn').on('click', dataHandler.getSavedGames);
+>>>>>>> Save/Load buttons are enabled after starting the game
     },
 
     resetProgress: function () {
