@@ -2,7 +2,10 @@
 	
 {% block title %}Game {% endblock %}
 
-{% block head %}<script src="{{ url_for('static', filename='scripts/game.js') }}" defer></script>{% endblock %}
+{% block head %}
+<script src="{{ url_for('static', filename='scripts/timer.js') }}" defer></script>
+<script src="{{ url_for('static', filename='scripts/game.js') }}" defer></script>
+{% endblock %}
 
 
 {% block content %}
@@ -54,8 +57,10 @@
 		<button id="start-button" onclick="gameplay.startGame()">Start Game</button>
 	
 		<ul>
+			{% if gamemode == 'classic' %}
 			<li><a class="btn">Load</a></li>
 			<li><a class="btn">Save</a></li>
+			{% endif %}
 			<li><a href="{{ url_for('logout') }}" class="btn">Logout</a></li>
 		</ul>
 
