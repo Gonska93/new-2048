@@ -33,7 +33,7 @@ document.onkeydown = function(ev) {
 
 let timer = {
     value: 0,
-    existance: false,
+    existence: false,
     running: null,
 
     startTimer: function() {
@@ -41,7 +41,7 @@ let timer = {
     },
 
     stopTimer: function() {
-        (gameplay.gameMode == 'ranked') ?
+        (gameplay.gameMode === 'ranked') ?
             (clearInterval(this.running),
             this.value = 0,
             timer.refresh()):
@@ -91,7 +91,7 @@ const gameplay = {
 
     gameMode: location.pathname.split("/").pop(),
 
-    timerInit: document.addEventListener("DOMContentLoaded", ()=> {(gameplay.gameMode == 'ranked') ? 
+    timerInit: document.addEventListener("DOMContentLoaded", ()=> {(gameplay.gameMode === 'ranked') ?
                 (
                 $('#game-buttons').prepend($('<div id="timer"></div>')),
                 timer.refresh()
@@ -156,7 +156,7 @@ const gameplay = {
         this.gameBoard = this.insertRandomTile(this.gameBoard);
         this.gameBoard = this.insertRandomTile(this.gameBoard);
         this.started = true;
-        (gameplay.gameMode == 'ranked') ? timer.startTimer(): null
+        (gameplay.gameMode === 'ranked') ? timer.startTimer(): null;
         this.refreshGameBoard(this.gameBoard);
     },
 
@@ -169,7 +169,7 @@ const gameplay = {
         gameplay.started = false;
         gameplay.score = 0;
         gameplay.refreshScore();
-        (gameplay.gameMode == 'ranked') ? timer.stopTimer(): null
+        (gameplay.gameMode === 'ranked') ? timer.stopTimer(): null;
         gameplay.refreshGameBoard(this.gameBoard);
     },
 
