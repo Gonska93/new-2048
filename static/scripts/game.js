@@ -59,6 +59,13 @@ const gameplay = {
         $('#score').text(gameplay.score);
     },
 
+    saveGameState: function() {
+        let title = $('#saveTitle').val();
+        dataHandler.saveData(gameplay.gameBoard, title);
+        $('#saveInput').replaceWith(getSaveButton());
+        $('#saveBtn').on('click', createTitleInput);
+    },
+
 
     getGameSettings: function(mode) {
         return {
