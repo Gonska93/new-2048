@@ -63,7 +63,7 @@
 		<ul>
 			{% if gamemode == 'classic' %}
 			<li><a class="btn">Load</a></li>
-			<li><a class="btn">Save</a></li>
+			<li><a id="saveBtn" class="btn">Save</a></li>
 			{% endif %}
 			<li><a href="{{ url_for('main') }}" class="btn">Back</a></li>
 			<li><a href="{{ url_for('logout') }}" class="btn">Logout</a></li>
