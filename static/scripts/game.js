@@ -89,7 +89,7 @@ const gameplay = {
 
     started: false,
 
-    gameMode: location.pathname.split("/").pop(),
+    gameMode: $('#mode').data('mode'),
 
     timerInit: document.addEventListener("DOMContentLoaded", ()=> {(gameplay.gameMode === 'ranked') ?
                 (
