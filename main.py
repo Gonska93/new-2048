@@ -1,5 +1,5 @@
-from flask import Flask, request, redirect, render_template, url_for, session, flash
-from logic import user_handler as uh
+from flask import Flask, request, redirect, render_template, url_for, session, flash, jsonify
+from logic import user_handler as uh, data_logic as dl
 from util import GAME_MODES
 
 
@@ -43,6 +43,14 @@ def logout():
     session.clear()
 
     return redirect(url_for('main'))
+
+
+@app.route('/save-game', methods=['POST'])
+@uh.authenticate_user
+def save_data():
+    data = request.get_json()
+    result = dl.save_game(data, session['player_name'])
+    return jsonify(result)
 
 
 if __name__ == "__main__":
