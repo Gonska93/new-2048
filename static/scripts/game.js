@@ -179,7 +179,7 @@ const gameplay = {
         return Math.round(value * multiplier) / multiplier;
     },
 
-    movement: function (movement_direction, game_board) {
+    movement: function (movement_direction, game_board, score=true) {
         let movement = {1: 'left',
                         2: 'up',
                         3: 'right',
@@ -206,7 +206,7 @@ const gameplay = {
             }
 
             game_board = this.reduceZeros(game_board);
-            this.sumTiles(game_board);
+            game_board = this.sumTiles(game_board, score);
             gameplay.refreshScore();
             game_board = this.reduceZeros(game_board);
 
@@ -267,24 +267,26 @@ const gameplay = {
     },
 
     // default - summing to left direction
-    sumTiles: function (game_board) {
-        for (let row of game_board) {
+    sumTiles: function (game_board, score) {
+        let temp = game_board.slice();
+        for (let row of temp) {
             if ((row[0] === row[1]) && (row[0] !== this.constant.zero)) {
-                gameplay.score += 1;
+                (score) ? gameplay.score += 1: null     
                 row[0] = row[0]*this.constant.two;
                 row[1] = this.constant.zero;
             }
             else if ((row[1] === row[2]) && (row[1] !== this.constant.zero)) {
-                gameplay.score += 1;
+                (score) ? gameplay.score += 1: null  
                 row[1] = row[1]*this.constant.two;
                 row[2] = this.constant.zero;
             }
             else if ((row[2] === row[3]) && (row[2] !== this.constant.zero)) {
-                gameplay.score += 1;
+                (score) ? gameplay.score += 1: null 
                 row[2] = row[2]*this.constant.two;
                 row[3] = this.constant.zero;
             }
         }
+        return temp
     },
 
     rotateBoard: function (game_board) {
@@ -343,7 +345,7 @@ const gameplay = {
                 copy.push(row.slice());
             }
             
-            if (!(this.arraysEqual(board_name, this.movement(mov, copy)))) { // if during comparing following movement condition returns true
+            if (!(this.arraysEqual(board_name, this.movement(mov, copy, score=false)))) { // if during comparing following movement condition returns true
                 return true;                                                 // don't check any other movements instantly return true
             }
         }
