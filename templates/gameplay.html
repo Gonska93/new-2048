@@ -2,11 +2,18 @@
 	
 {% block title %}Game {% endblock %}
 
-{% block head %}<script src="{{ url_for('static', filename='scripts/game.js') }}" defer></script>{% endblock %}
+{% block head %}
+<script src="{{ url_for('static', filename='scripts/timer.js') }}" defer></script>
+<script src="{{ url_for('static', filename='scripts/game.js') }}" defer></script>
+{% endblock %}
 
 
 {% block content %}
-    <div id="mode" data-mode="{{ gamemode }}" data-timer="5000">{{ gamemode.capitalize() }} mode</div>
+	<div id="mode" 
+		 data-mode="{{ gamemode }}" data-timer={% if gamemode == 'ranked' %}"0"{% else %}"600"{% endif %}>
+		{{ gamemode.capitalize() }} mode
+	</div>
+
 	<div id="game-board">
 		<table>
 
@@ -54,8 +61,11 @@
 		<button id="start-button" onclick="gameplay.startGame()">Start Game</button>
 	
 		<ul>
+			{% if gamemode == 'classic' %}
 			<li><a class="btn">Load</a></li>
 			<li><a class="btn">Save</a></li>
+			{% endif %}
+			<li><a href="{{ url_for('main') }}" class="btn">Back</a></li>
 			<li><a href="{{ url_for('logout') }}" class="btn">Logout</a></li>
 		</ul>
 
