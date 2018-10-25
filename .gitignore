@@ -1,6 +1,5 @@
 .idea/
 venv/
 __pycache__/
-data/db_config.py
 .history/
 .vscode/
