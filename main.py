@@ -49,10 +49,6 @@ def logout():
     return redirect(url_for('main'))
 
 
-def messageReceived(methods=['GET', 'POST']):
-    print('message was received!!!')
-
-
 @socketio.on('user_connected')
 def handle_user_connection(json, methods=['GET', 'POST']):
     json['message'] = session['player_name'] + ' has connected.'
