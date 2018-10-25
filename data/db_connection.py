@@ -7,7 +7,13 @@ from data.db_config import PGSQL
 def open_database():
     try:
         connection_string = PGSQL.DBURI
-        connection = psycopg2.connect(connection_string)
+        connection = psycopg2.connect(
+            database=connection_string.path[1:],
+            user=connection_string.username,
+            password=connection_string.password,
+            host=connection_string.hostname,
+            port=connection_string.port
+        )
         connection.autocommit = True
     except psycopg2.DatabaseError as exception:
         print('Database connection problem')
