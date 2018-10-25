@@ -118,34 +118,54 @@ const gameplay = {
     },
 
     init: function() {
+        $('#start-button').on('click', gameplay.startGame);
         this.gameSettings = this.getGameSettings(this.gameMode);
         if (this.gameSettings.timerOn) timer.init();
     },
 
     startGame: function() {
-        let startButton = document.getElementById('start-button');
-        startButton.setAttribute('onclick', 'gameplay.resetProgress()');
-        startButton.innerHTML = 'Reset';
-        this.gameBoard = this.insertRandomTile(this.gameBoard);
-        this.gameBoard = this.insertRandomTile(this.gameBoard);
-        this.started = true;
-        if (this.gameSettings.timerOn) timer.startTimer(this.gameSettings.isCountdown);
-        this.refreshGameBoard(this.gameBoard);
-        $('#saveBtn').on('click', createTitleInput);
-        $('#loadBtn').on('click', dataHandler.getSavedGames);
+        let startButton = $('#start-button'),
+            saveBtn = $('#saveBtn'),
+            loadBtn = $('#loadBtn');
+
+        startButton.off('click');
+        startButton.on('click', gameplay.resetProgress);
+        startButton.text('Reset');
+
+        gameplay.gameBoard = gameplay.insertRandomTile(gameplay.gameBoard);
+        gameplay.gameBoard = gameplay.insertRandomTile(gameplay.gameBoard);
+        gameplay.started = true;
+
+        if (gameplay.gameSettings.timerOn) timer.startTimer(gameplay.gameSettings.isCountdown);
+        gameplay.refreshGameBoard(gameplay.gameBoard);
+
+        saveBtn.off('click');
+        saveBtn.on('click', createTitleInput);
+
+        loadBtn.off('click');
+        loadBtn.on('click', dataHandler.getSavedGames);
     },
 
     resetProgress: function () {
-        let startButton = document.getElementById('start-button');
-        startButton.setAttribute('onclick', 'gameplay.startGame()');
-        startButton.innerHTML = 'Start Game';
+        let startButton = $('#start-button'),
+            saveBtn = $('#saveBtn'),
+            loadBtn = $('#loadBtn');
+
+
+        startButton.off('click');
+        startButton.on('click', gameplay.startGame);
+        startButton.text('Start Game');
+
+        saveBtn.off('click');
+        (loadBtn.length) ? loadBtn.off('click'): restoreLoadBtn();
        
-        this.gameBoard = [[0,0,0,0],[0,0,0,0],[0,0,0,0],[0,0,0,0]];
+        gameplay.gameBoard = [[0,0,0,0],[0,0,0,0],[0,0,0,0],[0,0,0,0]];
         gameplay.started = false;
         gameplay.score = 0;
         gameplay.refreshScore();
+
         if (gameplay.gameSettings.timerOn) timer.stopTimer();
-        gameplay.refreshGameBoard(this.gameBoard);
+        gameplay.refreshGameBoard(gameplay.gameBoard);
     },
 
     round: function (value, precision) {
