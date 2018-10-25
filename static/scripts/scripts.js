@@ -51,13 +51,15 @@ function getFlashDiv(result) {
 function getSavesDiv() {
     return `
     <div id="savesDiv">
-    <h3>Saved games:</h3>
+        <h3>Saved games:</h3>
+        <ul id="savesDiv-container"></ul>
+        <button>Back</button>
     </div>`
 }
 
 function getStateButton(state) {
     return `
-    <button type="button" id="state-${state.id}">${state.save_title}</button></br>`
+    <li><a id="state-${state.id}">${state.save_title}</a></li>`
 }
 
 
@@ -81,6 +83,11 @@ function insertForm(form_name) {
         backButton.addEventListener("click", function(event) {event.preventDefault()});
 }
 
+function getLoadBtn() {
+    return `
+    <a id="loadBtn" class="btn">Load</a>`
+}
+
 function createTitleInput() {
     $('#saveBtn').replaceWith(getTitleInput());
     $('#sendData').on('click', gameplay.saveGameState);
@@ -89,15 +96,28 @@ function createTitleInput() {
 function flashResult(result) {
     $('.flashes').append(getFlashDiv(result));
     let flashes = $('.message');
-    setTimeout(() => flashes.remove(), 3000);
+    setTimeout(() => flashes.remove(), 2000);
 }
 
 function displaySavedGames(states) {
-    let savesDiv = $(getSavesDiv());
-    $('#loadBtn').replaceWith(savesDiv);
+    $('#loadBtn').replaceWith($(getSavesDiv()));
+
+    let savesDivContainer = $('#savesDiv-container');
+    $('#savesDiv button').on('click', restoreLoadBtn);
+
     states.forEach((state) => {
         let stateButton = $(getStateButton(state));
-        stateButton.on('click', () => gameplay.loadState(state.game_state));
-        savesDiv.append(stateButton);
+        stateButton.on('click', () => { 
+            gameplay.loadState(state.game_state);
+            restoreLoadBtn();
+        });
+        savesDivContainer.append(stateButton);
     })
+}
+
+function restoreLoadBtn() {
+    let loadButton = $(getLoadBtn());
+    loadButton.off('click');
+    loadButton.on('click', dataHandler.getSavedGames);
+    $('#savesDiv').replaceWith(loadButton);
 }
