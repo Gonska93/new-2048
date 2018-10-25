@@ -80,6 +80,6 @@ def get_saved_games():
 
 if __name__ == "__main__":
     socketio.run(app,
-                 host="192.168.10.63",
+                 host="127.0.0.1",
                  port=5000,
                  debug=True)
