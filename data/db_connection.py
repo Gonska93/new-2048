@@ -1,12 +1,12 @@
 import psycopg2
 import psycopg2.extras
 from functools import wraps
-from data.db_config import PGSQL
+from db_config import get_connection_string
 
 
 def open_database():
     try:
-        connection_string = PGSQL.DBURI
+        connection_string = get_connection_string()
         connection = psycopg2.connect(
             database=connection_string.path[1:],
             user=connection_string.username,
