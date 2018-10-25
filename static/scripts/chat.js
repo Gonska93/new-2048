@@ -16,5 +16,7 @@ socket.on( 'connect', () => {
 socket.on( 'response', ( msg ) => {
     let messageToDisplay = (msg.player_name) ?
         `${msg.player_name}:${msg.message}`: msg.message;
-    $('#chat-messages').append(`<div>${ messageToDisplay }</div>`)
+    $('#chat-messages').append(`<div>${ messageToDisplay }</div>`);
+    let test = document.getElementById('chat-messages');
+    test.scrollTop = test.scrollHeight;
 });
