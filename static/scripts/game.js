@@ -56,7 +56,6 @@ const gameplay = {
     gameSettings: {},
 
     loadState: function(loadedState) {
-        //console.log(loadedState);
         gameplay.gameBoard = loadedState.game_state;
         gameplay.score = loadedState.save_score;
         gameplay.refreshScore();
