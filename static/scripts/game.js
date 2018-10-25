@@ -125,6 +125,9 @@ const gameplay = {
 
     startGame: function() {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> Save/load refactor
         let startButton = $('#start-button'),
             saveBtn = $('#saveBtn'),
             loadBtn = $('#loadBtn');
@@ -145,6 +148,7 @@ const gameplay = {
 
         loadBtn.off('click');
         loadBtn.on('click', dataHandler.getSavedGames);
+<<<<<<< HEAD
 =======
         let startButton = document.getElementById('start-button');
         startButton.setAttribute('onclick', 'gameplay.resetProgress()');
@@ -157,6 +161,8 @@ const gameplay = {
         $('#saveBtn').on('click', createTitleInput);
         $('#loadBtn').on('click', dataHandler.getSavedGames);
 >>>>>>> Save/Load buttons are enabled after starting the game
+=======
+>>>>>>> Save/load refactor
     },
 
     resetProgress: function () {
