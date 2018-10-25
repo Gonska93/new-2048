@@ -1,19 +1,13 @@
 import psycopg2
 import psycopg2.extras
 from functools import wraps
-from data.db_config import get_connection_string
+from data.db_config import PGSQL
 
 
 def open_database():
     try:
-        connection_string = get_connection_string()
-        connection = psycopg2.connect(
-            database=connection_string.path[1:],
-            user=connection_string.username,
-            password=connection_string.password,
-            host=connection_string.hostname,
-            port=connection_string.port
-        )
+        connection_string = PGSQL.DBURI
+        connection = psycopg2.connect(connection_string)
         connection.autocommit = True
     except psycopg2.DatabaseError as exception:
         print('Database connection problem')
