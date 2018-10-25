@@ -56,6 +56,7 @@ const gameplay = {
     gameSettings: {},
 
     loadState: function(loadedState) {
+        //console.log(loadedState);
         gameplay.gameBoard = loadedState.game_state;
         gameplay.score = loadedState.save_score;
         gameplay.refreshScore();
@@ -126,10 +127,6 @@ const gameplay = {
     },
 
     startGame: function() {
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> Save/load refactor
         let startButton = $('#start-button'),
             saveBtn = $('#saveBtn'),
             loadBtn = $('#loadBtn');
@@ -150,21 +147,6 @@ const gameplay = {
 
         loadBtn.off('click');
         loadBtn.on('click', dataHandler.getSavedGames);
-<<<<<<< HEAD
-=======
-        let startButton = document.getElementById('start-button');
-        startButton.setAttribute('onclick', 'gameplay.resetProgress()');
-        startButton.innerHTML = 'Reset';
-        this.gameBoard = this.insertRandomTile(this.gameBoard);
-        this.gameBoard = this.insertRandomTile(this.gameBoard);
-        this.started = true;
-        if (this.gameSettings.timerOn) timer.startTimer(this.gameSettings.isCountdown);
-        this.refreshGameBoard(this.gameBoard);
-        $('#saveBtn').on('click', createTitleInput);
-        $('#loadBtn').on('click', dataHandler.getSavedGames);
->>>>>>> Save/Load buttons are enabled after starting the game
-=======
->>>>>>> Save/load refactor
     },
 
     resetProgress: function () {

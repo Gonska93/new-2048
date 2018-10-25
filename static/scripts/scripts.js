@@ -48,46 +48,19 @@ function getFlashDiv(result) {
     </div>`
 }
 
-<<<<<<< HEAD
-<<<<<<< HEAD
 function getSavesDiv() {
     return `
     <div id="savesDiv">
         <h3>Saved games:</h3>
         <ul id="savesDiv-container"></ul>
         <button>Back</button>
-=======
-function getSavesDiv() {
-    return `
-    <div id="savesDiv">
-<<<<<<< HEAD
-    <h3>Saved games:</h3>
->>>>>>> Created necessary dom manipulation for load button.
-=======
-        <h3>Saved games:</h3>
-        <ul id="savesDiv-container"></ul>
-        <button>Back</button>
->>>>>>> Save/load refactor
     </div>`
 }
 
 function getStateButton(state) {
     return `
-<<<<<<< HEAD
-<<<<<<< HEAD
     <li><a id="state-${state.id}">${state.save_title}</a></li>`
 }
-
-=======
->>>>>>> Added dom manipuation for saving data
-=======
-    <button type="button" id="state-${state.id}">${state.save_title}</button></br>`
-=======
-    <li><a id="state-${state.id}">${state.save_title}</a></li>`
->>>>>>> Save/load refactor
-}
-
->>>>>>> Created necessary dom manipulation for load button.
 
 function insertMainButtons() {
     $('#form').remove();
@@ -109,20 +82,11 @@ function insertForm(form_name) {
         backButton.addEventListener("click", function(event) {event.preventDefault()});
 }
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> Save/load refactor
 function getLoadBtn() {
     return `
     <a id="loadBtn" class="btn">Load</a>`
 }
 
-<<<<<<< HEAD
-=======
->>>>>>> Added dom manipuation for saving data
-=======
->>>>>>> Save/load refactor
 function createTitleInput() {
     $('#saveBtn').replaceWith(getTitleInput());
     $('#sendData').on('click', gameplay.saveGameState);
@@ -131,8 +95,6 @@ function createTitleInput() {
 function flashResult(result) {
     $('.flashes').append(getFlashDiv(result));
     let flashes = $('.message');
-<<<<<<< HEAD
-<<<<<<< HEAD
     setTimeout(() => flashes.remove(), 2000);
 }
 
@@ -158,39 +120,3 @@ function restoreLoadBtn() {
     loadButton.on('click', dataHandler.getSavedGames);
     $('#savesDiv').replaceWith(loadButton);
 }
-=======
-    setTimeout(() => flashes.remove(), 3000);
-=======
-    setTimeout(() => flashes.remove(), 2000);
->>>>>>> Save/load refactor
-}
-<<<<<<< HEAD
->>>>>>> Added dom manipuation for saving data
-=======
-
-function displaySavedGames(states) {
-    $('#loadBtn').replaceWith($(getSavesDiv()));
-
-    let savesDivContainer = $('#savesDiv-container');
-    $('#savesDiv button').on('click', restoreLoadBtn);
-
-    states.forEach((state) => {
-        let stateButton = $(getStateButton(state));
-        stateButton.on('click', () => { 
-            gameplay.loadState(state.game_state);
-            restoreLoadBtn();
-        });
-        savesDivContainer.append(stateButton);
-    })
-}
-<<<<<<< HEAD
->>>>>>> Created displaySavedGames function
-=======
-
-function restoreLoadBtn() {
-    let loadButton = $(getLoadBtn());
-    loadButton.off('click');
-    loadButton.on('click', dataHandler.getSavedGames);
-    $('#savesDiv').replaceWith(loadButton);
-}
->>>>>>> Save/load refactor

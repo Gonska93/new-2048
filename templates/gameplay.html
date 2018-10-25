@@ -5,23 +5,8 @@
 {% block head %}
 <script src="{{ url_for('static', filename='scripts/timer.js') }}" defer></script>
 <script src="{{ url_for('static', filename='scripts/game.js') }}" defer></script>
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
 <script src="{{ url_for('static', filename='scripts/chat.js') }}" defer></script>
-=======
-<script src="{{ url_for('static', filename='scripts/data_handler.js') }}" defer></script>
->>>>>>> Flash messages are now always created on page
-=======
 <script src="{{ url_for('static', filename='scripts/data_handler.js') }}"></script>
->>>>>>> Data handler doesnt need defer
-=======
-<script src="{{ url_for('static', filename='scripts/data_handler.js') }}" defer></script>
->>>>>>> Flash messages are now always created on page
-=======
-<script src="{{ url_for('static', filename='scripts/data_handler.js') }}"></script>
->>>>>>> Data handler doesnt need defer
 {% endblock %}
 
 
@@ -78,15 +63,7 @@
 	
 		<ul>
 			{% if gamemode == 'classic' %}
-<<<<<<< HEAD
-<<<<<<< HEAD
 			<li><a id="loadBtn" class="btn">Load</a></li>
-=======
-			<li><a class="btn">Load</a></li>
->>>>>>> Added dom manipuation for saving data
-=======
-			<li><a id="loadBtn" class="btn">Load</a></li>
->>>>>>> Created necessary dom manipulation for load button.
 			<li><a id="saveBtn" class="btn">Save</a></li>
 			{% endif %}
 			<li><a href="{{ url_for('main') }}" class="btn">Back</a></li>
