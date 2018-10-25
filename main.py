@@ -10,6 +10,11 @@ app.config['SECRET_KEY'] = 'vnkdjnfjknfl1232#'
 socketio = SocketIO(app)
 
 
+@app.route('/test-socket')
+def test_socket():
+    socketio.run(app)
+
+
 @app.route('/')
 def main():
 
