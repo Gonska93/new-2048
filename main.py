@@ -50,16 +50,15 @@ def logout():
 
 
 @socketio.on('user_connected')
-def handle_user_connection(json, methods=['GET', 'POST']):
+def handle_user_connection(json):
     json['message'] = session['player_name'] + ' has connected.'
-    print(json)
-    socketio.emit('my response', json, callback=messageReceived)
+    socketio.emit('response', json)
 
 
 @socketio.on('message')
-def handle_message(json, methods=['GET', 'POST']):
+def handle_message(json):
     json['player_name'] = session['player_name']
-    socketio.emit('my response', json, callback=messageReceived)
+    socketio.emit('response', json)
 
 
 if __name__ == "__main__":
