@@ -1,5 +1,5 @@
 let dataHandler = {
-    saveData: function(board_data, title) {
+    saveData: function(board_data, title, score) {
         fetch('/save-game', {
             method: 'POST',
             headers: {
@@ -7,7 +7,8 @@ let dataHandler = {
             },
             body: JSON.stringify({
                 game_state: board_data,
-                save_title: title
+                save_title: title,
+                save_score: score
             })
         })
         .then(response => response.json())
