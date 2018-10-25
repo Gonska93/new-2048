@@ -1,7 +1,7 @@
 import psycopg2
 import psycopg2.extras
 from functools import wraps
-from db_config import get_connection_string
+from data.db_config import get_connection_string
 
 
 def open_database():
