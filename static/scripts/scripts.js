@@ -108,7 +108,7 @@ function displaySavedGames(states) {
     states.forEach((state) => {
         let stateButton = $(getStateButton(state));
         stateButton.on('click', () => { 
-            gameplay.loadState(state.game_state);
+            gameplay.loadState(state);
             restoreLoadBtn();
         });
         savesDivContainer.append(stateButton);

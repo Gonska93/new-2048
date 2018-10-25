@@ -56,7 +56,9 @@ const gameplay = {
     gameSettings: {},
 
     loadState: function(loadedState) {
-        gameplay.gameBoard = loadedState;
+        gameplay.gameBoard = loadedState.game_state;
+        gameplay.score = loadedState.save_score;
+        gameplay.refreshScore();
         gameplay.refreshGameBoard(gameplay.gameBoard);
     },
 
@@ -66,7 +68,7 @@ const gameplay = {
 
     saveGameState: function() {
         let title = $('#saveTitle').val();
-        dataHandler.saveData(gameplay.gameBoard, title);
+        dataHandler.saveData(gameplay.gameBoard, title, gameplay.score);
         $('#saveInput').replaceWith(getSaveButton());
         $('#saveBtn').on('click', createTitleInput);
     },
