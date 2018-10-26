@@ -1,46 +1,94 @@
 {% extends 'base.html' %}
-	{% block title %}Game {% endblock %}
+	
+{% block title %}Game {% endblock %}
+
+{% block head %}
+<script src="{{ url_for('static', filename='scripts/timer.js') }}" defer></script>
+<script src="{{ url_for('static', filename='scripts/game.js') }}" defer></script>
+<script src="{{ url_for('static', filename='scripts/chat.js') }}" defer></script>
+<script src="{{ url_for('static', filename='scripts/data_handler.js') }}"></script>
+{% endblock %}
+
+
 {% block content %}
+	<div id="mode" 
+		 data-mode="{{ gamemode }}" data-timer={% if gamemode == 'ranked' %}"0"{% else %}"600"{% endif %}>
+		{{ gamemode.capitalize() }} mode
+	</div>
 	<div id="game-board">
 		<table>
+
 			<tr>
 				<th></th>
 				<th></th>
 				<th></th>
 				<th></th>
 			</tr>
+
 			<tr>
 				<td id='A1'></td>
 				<td id='A2'></td>
 				<td id='A3'></td>
 				<td id='A4'></td>
 			</tr>
+
 			<tr>
 				<td id='B1'></td>
 				<td id='B2'></td>
 				<td id='B3'></td>
 				<td id='B4'></td>
 			</tr>
+
 			<tr>
 				<td id='C1'></td>
 				<td id='C2'></td>
 				<td id='C3'></td>
 				<td id='C4'></td>
 			</tr>
+
 			<tr>
 				<td id='D1'></td>
 				<td id='D2'></td>
 				<td id='D3'></td>
 				<td id='D4'></td>
 			</tr>
+
 		</table>
 	</div>
 	<div class="buttons" id="game-buttons">
-		<button id="start-button" onclick="gameplay.startGame()">Start Game</button>
+
+		<div id="score">0</div>
+
+		<button id="start-button">Start Game</button>
+	
 		<ul>
-			<li><a class="btn">Load</a></li>
-			<li><a class="btn">Save</a></li>
+			{% if gamemode == 'classic' %}
+			<li><a id="loadBtn" class="btn">Load</a></li>
+			<li><a id="saveBtn" class="btn">Save</a></li>
+			{% endif %}
+			<li><a href="{{ url_for('main') }}" class="btn">Back</a></li>
 			<li><a href="{{ url_for('logout') }}" class="btn">Logout</a></li>
 		</ul>
+
+	</div>
+	<div id="chat-container">
+
+		<div id="chat-title">
+			CHAT TITLE
+		</div>
+
+		<div id="chat-body">
+
+			<div id="chat-messages" style="overflow-y: auto; word-break: break-all;">
+			</div>
+
+			<div id="chat-input">
+				<form action="" method="POST">
+					<input type="text" id="user-input"/>
+					<button id="message-submit">Submit</button>
+				</form>
+			</div>
+
+		</div>
 	</div>
 {% endblock %}

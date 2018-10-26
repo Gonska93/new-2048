@@ -11,15 +11,17 @@
 		<div>Logged as {{ session['player_name'] }}</div>
 		<div class="buttons">
 			<ul>
-				<li><a href="{{ url_for('game') }}" onclick="startGame()" class="btn">Play</a></li>
+                {% for mode in gamemodes %}
+				    <li><a href="{{ url_for('game', mode=mode) }}" class="btn">{{ mode.capitalize() }} Mode</a></li>
+                {% endfor %}
 				<li><a href="{{ url_for('logout') }}" class="btn">Logout</a></li>
 			</ul>
 		</div>
 		{% else %}
 		<div class="buttons">
 			<ul>
-				<li><a onclick="insertForm('loginForm')" class="btn">Login</a></li>
-				<li><a onclick="insertForm('registerForm')" class="btn">Register</a></li>
+				<li><a onclick="insertForm('loginForm')" class="custom-btn">Login</a></li>
+				<li><a onclick="insertForm('registerForm')" class="custom-btn">Register</a></li>
 			</ul>
 		</div>
 		{% endif %}

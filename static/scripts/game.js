@@ -49,13 +49,45 @@ const gameplay = {
 
     started: false,
 
+    gameMode: $('#mode').data('mode'),
+    
+    score: 0,
+
+    gameSettings: {},
+
+    loadState: function(loadedState) {
+        gameplay.gameBoard = loadedState.game_state;
+        gameplay.score = loadedState.save_score;
+        gameplay.refreshScore();
+        gameplay.refreshGameBoard(gameplay.gameBoard);
+    },
+
+    refreshScore: function() {
+        $('#score').text(gameplay.score);
+    },
+
+    saveGameState: function() {
+        let title = $('#saveTitle').val();
+        dataHandler.saveData(gameplay.gameBoard, title, gameplay.score);
+        $('#saveInput').replaceWith(getSaveButton());
+        $('#saveBtn').on('click', createTitleInput);
+    },
+
+
+    getGameSettings: function(mode) {
+        return {
+            maxTile: (mode === 'classic') ? false : 2048,
+            timerOn: (mode !== 'classic'),
+            isCountdown: (mode === 'time-attack')
+        }
+    },
+
     refreshGameBoard: function (game_board) {
-        let displayBoard = game_board.flat(),
-            toInsert;
+        let displayBoard = game_board.flat()
 
         for (let i = 0; i < this.table.length; i++) {
             $(`#${gameplay.table[i]}`).text(
-                (displayBoard[i]) ? toInsert = displayBoard[i]: toInsert = ''
+                (displayBoard[i]) ? displayBoard[i]: ''
             );
             this.addColors(this.table[i]);
         }
@@ -87,25 +119,55 @@ const gameplay = {
         return game_board
     },
 
-    startGame: function() {
-        let startButton = document.getElementById('start-button');
-        startButton.setAttribute('onclick', 'gameplay.resetProgress()');
-        startButton.innerHTML = 'Reset';
+    init: function() {
+        $('#start-button').on('click', gameplay.startGame);
+        this.gameSettings = this.getGameSettings(this.gameMode);
+        if (this.gameSettings.timerOn) timer.init();
+    },
 
-        this.gameBoard = this.insertRandomTile(this.gameBoard);
-        this.gameBoard = this.insertRandomTile(this.gameBoard);
-        this.started = true;
-        this.refreshGameBoard(this.gameBoard);
+    startGame: function() {
+        let startButton = $('#start-button'),
+            saveBtn = $('#saveBtn'),
+            loadBtn = $('#loadBtn');
+
+        startButton.off('click');
+        startButton.on('click', gameplay.resetProgress);
+        startButton.text('Reset');
+
+        gameplay.gameBoard = gameplay.insertRandomTile(gameplay.gameBoard);
+        gameplay.gameBoard = gameplay.insertRandomTile(gameplay.gameBoard);
+        gameplay.started = true;
+
+        if (gameplay.gameSettings.timerOn) timer.startTimer(gameplay.gameSettings.isCountdown);
+        gameplay.refreshGameBoard(gameplay.gameBoard);
+
+        saveBtn.off('click');
+        saveBtn.on('click', createTitleInput);
+
+        loadBtn.off('click');
+        loadBtn.on('click', dataHandler.getSavedGames);
     },
 
     resetProgress: function () {
-        let startButton = document.getElementById('start-button');
-        startButton.setAttribute('onclick', 'gameplay.startGame()');
-        startButton.innerHTML = 'Start Game';
+        let startButton = $('#start-button'),
+            saveBtn = $('#saveBtn'),
+            loadBtn = $('#loadBtn');
+
+
+        startButton.off('click');
+        startButton.on('click', gameplay.startGame);
+        startButton.text('Start Game');
+
+        saveBtn.off('click');
+        (loadBtn.length) ? loadBtn.off('click'): restoreLoadBtn();
        
-        this.gameBoard = [[0,0,0,0],[0,0,0,0],[0,0,0,0],[0,0,0,0]];
+        gameplay.gameBoard = [[0,0,0,0],[0,0,0,0],[0,0,0,0],[0,0,0,0]];
         gameplay.started = false;
-        gameplay.refreshGameBoard(this.gameBoard);
+        gameplay.score = 0;
+        gameplay.refreshScore();
+
+        if (gameplay.gameSettings.timerOn) timer.stopTimer();
+        gameplay.refreshGameBoard(gameplay.gameBoard);
     },
 
     round: function (value, precision) {
@@ -114,7 +176,7 @@ const gameplay = {
         return Math.round(value * multiplier) / multiplier;
     },
 
-    movement: function (movement_direction, game_board) {
+    movement: function (movement_direction, game_board, score=true) {
         let movement = {1: 'left',
                         2: 'up',
                         3: 'right',
@@ -141,7 +203,8 @@ const gameplay = {
             }
 
             game_board = this.reduceZeros(game_board);
-            this.sumTiles(game_board);
+            game_board = this.sumTiles(game_board, score);
+            gameplay.refreshScore();
             game_board = this.reduceZeros(game_board);
 
             switch (movement_direction) { //Rotate/reverse back the game_board and do comparison.
@@ -201,21 +264,26 @@ const gameplay = {
     },
 
     // default - summing to left direction
-    sumTiles: function (game_board) {
-        for (let row of game_board) {
+    sumTiles: function (game_board, score) {
+        let temp = game_board.slice();
+        for (let row of temp) {
             if ((row[0] === row[1]) && (row[0] !== this.constant.zero)) {
+                (score) ? gameplay.score += row[0] * 10: null     
                 row[0] = row[0]*this.constant.two;
                 row[1] = this.constant.zero;
             }
             else if ((row[1] === row[2]) && (row[1] !== this.constant.zero)) {
+                (score) ? gameplay.score += row[1] * 10: null  
                 row[1] = row[1]*this.constant.two;
                 row[2] = this.constant.zero;
             }
             else if ((row[2] === row[3]) && (row[2] !== this.constant.zero)) {
+                (score) ? gameplay.score += row[2] * 10: null 
                 row[2] = row[2]*this.constant.two;
                 row[3] = this.constant.zero;
             }
         }
+        return temp
     },
 
     rotateBoard: function (game_board) {
@@ -274,10 +342,12 @@ const gameplay = {
                 copy.push(row.slice());
             }
             
-            if (!(this.arraysEqual(board_name, this.movement(mov, copy)))) { // if during comparing following movement condition returns true
+            if (!(this.arraysEqual(board_name, this.movement(mov, copy, score=false)))) { // if during comparing following movement condition returns true
                 return true;                                                 // don't check any other movements instantly return true
             }
         }
         return false;
     }
 };
+
+gameplay.init();

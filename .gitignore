@@ -1,9 +1,6 @@
-<<<<<<< HEAD
 .idea/
 venv/
-__pycache__/
 data/db_config.py
-=======
-/venv/
 __pycache__/
->>>>>>> cc41a80ae1f59c8cfeee84c6a4e029f24eeeebe6
+.history/
+.vscode/
