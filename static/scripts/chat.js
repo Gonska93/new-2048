@@ -14,9 +14,14 @@ socket.on( 'connect', () => {
 });
 
 socket.on( 'response', ( msg ) => {
-    let messageToDisplay = (msg.player_name) ?
+    if (msg.message) {
+        let messageToDisplay = (msg.player_name) ?
         `${msg.player_name}:${msg.message}`: msg.message;
-    $('#chat-messages').append(`<div>${ messageToDisplay }</div>`);
-    let test = document.getElementById('chat-messages');
-    test.scrollTop = test.scrollHeight;
+        let messageDiv = $('<div class="chat-message"></div>');
+        messageDiv.text(`${messageToDisplay}`);
+        $('#chat-messages').append(messageDiv);
+        let test = document.getElementById('chat-messages');
+        test.scrollTop = test.scrollHeight;
+    }
+
 });
