@@ -60,7 +60,9 @@ const gameplay = {
     started: false,
 
     gameMode: $('#mode').data('mode'),
-    
+
+    gameState: 0,
+
     score: 0,
 
     gameSettings: {},
