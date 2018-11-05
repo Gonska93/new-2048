@@ -289,16 +289,22 @@ const gameplay = {
                 (score) ? gameplay.score += row[0] * 10: null     
                 row[0] = row[0]*this.constant.two;
                 row[1] = this.constant.zero;
+
+                if ((row[0] === gameplay.gameSettings.maxTile) && score) {gameplay.gameState = 1} 
             }
             else if ((row[1] === row[2]) && (row[1] !== this.constant.zero)) {
                 (score) ? gameplay.score += row[1] * 10: null  
                 row[1] = row[1]*this.constant.two;
                 row[2] = this.constant.zero;
+
+                if ((row[1] === gameplay.gameSettings.maxTile) && score) {gameplay.gameState = 1} 
             }
             else if ((row[2] === row[3]) && (row[2] !== this.constant.zero)) {
                 (score) ? gameplay.score += row[2] * 10: null 
                 row[2] = row[2]*this.constant.two;
                 row[3] = this.constant.zero;
+                
+                if ((row[2] === gameplay.gameSettings.maxTile) && score) {gameplay.gameState = 1} 
             }
         }
         return temp
