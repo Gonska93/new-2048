@@ -248,6 +248,12 @@ const gameplay = {
         return game_board
     },
 
+    resetGameProgress: function() {
+        gameplay.started = false;
+        gameplay.score = this.constant.zero;
+        gameplay.gameBoard = gameplay.emptyBoard;
+    },
+
     // default - moving tiles to left side
     reduceZeros: function (game_board) {
         let result = [],
