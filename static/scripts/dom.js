@@ -67,7 +67,13 @@ let dom = {
         loadButton.off('click');
         loadButton.on('click', dataHandler.getSavedGames);
         $('#savesDiv').replaceWith(loadButton);
-    }
+    },
 
-}
+    updateGameOverModal: function() {
+        alert(`You ${(gameplay.gameState == 1) ? 'won':'lost'}`);
+        gameplay.gameState = 0;
+        gameplay.started = false;
+        timer.stopTimer();
+    }
+};
 
