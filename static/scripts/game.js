@@ -69,8 +69,8 @@ const gameplay = {
     saveGameState: function() {
         let title = $('#saveTitle').val();
         dataHandler.saveData(gameplay.gameBoard, title, gameplay.score);
-        $('#saveInput').replaceWith(getSaveButton());
-        $('#saveBtn').on('click', createTitleInput);
+        $('#saveInput').replaceWith(templates.getSaveButton());
+        $('#saveBtn').on('click', dom.createTitleInput);
     },
 
 
@@ -83,7 +83,7 @@ const gameplay = {
     },
 
     refreshGameBoard: function (game_board) {
-        let displayBoard = game_board.flat()
+        let displayBoard = game_board.flat();
 
         for (let i = 0; i < this.table.length; i++) {
             $(`#${gameplay.table[i]}`).text(
@@ -142,7 +142,7 @@ const gameplay = {
         gameplay.refreshGameBoard(gameplay.gameBoard);
 
         saveBtn.off('click');
-        saveBtn.on('click', createTitleInput);
+        saveBtn.on('click', dom.createTitleInput);
 
         loadBtn.off('click');
         loadBtn.on('click', dataHandler.getSavedGames);
@@ -159,7 +159,7 @@ const gameplay = {
         startButton.text('Start Game');
 
         saveBtn.off('click');
-        (loadBtn.length) ? loadBtn.off('click'): restoreLoadBtn();
+        (loadBtn.length) ? loadBtn.off('click'): dom.restoreLoadBtn();
        
         gameplay.gameBoard = [[0,0,0,0],[0,0,0,0],[0,0,0,0],[0,0,0,0]];
         gameplay.started = false;
