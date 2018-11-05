@@ -370,6 +370,7 @@ const gameplay = {
                 return true;                                                 // don't check any other movements instantly return true
             }
         }
+        gameplay.gameState = 2;
         return false;
     }
 };
