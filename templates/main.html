@@ -2,20 +2,21 @@
 	{% block title %}Main Menu  {% endblock %}
 
 	{% block menu_title %}
-	<div class="header"><h1>Main Menu</h1></div>
+	<div class="mx-auto text-center col-3 badge-pill badge-light"><h1>Main Menu</h1></div>
 	{% endblock %}
 
 	{% block content %}
-	<div id="menu-content">
+	<div id="menu-content" class="card shadow-lg col-6 mx-auto">
 		{% if 'player_name' in session %}
-		<div>Logged as {{ session['player_name'] }}</div>
-		<div class="buttons">
-			<ul>
+		<div class="buttons mx-auto text-center">
                 {% for mode in gamemodes %}
-				    <li><a href="{{ url_for('game', mode=mode) }}" class="btn">{{ mode.capitalize() }} Mode</a></li>
+                    <div class="my-2">
+                        <a href="{{ url_for('game', mode=mode) }}">
+                            <button class="btn btn-info shadow">{{ mode.capitalize() }} Mode</button>
+                        </a>
+                    </div>
                 {% endfor %}
-				<li><a href="{{ url_for('logout') }}" class="btn">Logout</a></li>
-			</ul>
+				<a href="{{ url_for('logout') }}" class="btn">Logout</a>
 		</div>
 		{% else %}
 		<div class="buttons">
