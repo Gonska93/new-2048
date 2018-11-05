@@ -240,7 +240,8 @@ const gameplay = {
                     comparison = this.arraysEqual(boardBeforeMovement, game_board);
                     break;
             }
-            if (!(comparison)) {
+
+            if (!(comparison)) { // Check if any movement has been made, if yes then insert new tile (2 or 4)
                 game_board = this.insertRandomTile(game_board);
             }
         }
