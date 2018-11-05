@@ -5,12 +5,12 @@ let timer = {
 
     startTimer: function(countdown=false) {
        this.running = setInterval(this.timeStep, 1000, countdown);
+       timer.refresh();
     },
 
     stopTimer: function() {
         clearInterval(this.running);
         this.value = $('#mode').data('timer');
-        timer.refresh();
     },
 
     convertTime: function(secondsAmount) {
