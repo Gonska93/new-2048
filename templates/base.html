@@ -9,20 +9,17 @@
     {% block head %}
     {% endblock %}
 </head>
-<body>
-    <div id="main-content">
-        {% block menu_title %}{% endblock %}
-        {% block content %}{% endblock %}
+<body class="bg-primary">
+    {% include 'navbar.html' %}
+    <div class="flashes">
         {% with messages = get_flashed_messages(with_categories=True) %}
-        <div class=flashes>
             {% if messages %}
                     {% for category, message in messages %}
                         <div class="message {{ category }}">
                             <h5>{{ message }}</h5>
                         </div>
-                    {% endfor %} 
+                    {% endfor %}
             {% endif %}
-        </div>
         {% endwith %}
     </div>
 </body>
