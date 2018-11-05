@@ -22,15 +22,25 @@ document.onkeydown = function(ev) {
                 default: return; // exit this handler for other keys
             }
             gameplay.refreshGameBoard(gameplay.gameBoard);
+
+            if (gameplay.gameState == 1) {
+                dom.updateGameOverModal();
+            }
+
             ev.preventDefault(); // prevent the default action (scroll / move caret)
         }
         else {
-            document.write('GAME OVER!');
+            dom.updateGameOverModal()
         }
     }
 };
 
 const gameplay = {
+    emptyBoard: [[0, 0, 0, 0],
+                 [0, 0, 0, 0],
+                 [0, 0, 0, 0],
+                 [0, 0, 0, 0]],
+
     gameBoard: [[0, 0, 0, 0],
                 [0, 0, 0, 0],
                 [0, 0, 0, 0],
