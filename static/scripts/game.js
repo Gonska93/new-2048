@@ -173,9 +173,8 @@ const gameplay = {
         saveBtn.off('click');
         (loadBtn.length) ? loadBtn.off('click'): dom.restoreLoadBtn();
        
-        gameplay.gameBoard = [[0,0,0,0],[0,0,0,0],[0,0,0,0],[0,0,0,0]];
-        gameplay.started = false;
-        gameplay.score = 0;
+        timer.refresh();
+        gameplay.resetGameProgress();
         gameplay.refreshScore();
 
         if (gameplay.gameSettings.timerOn) timer.stopTimer();
