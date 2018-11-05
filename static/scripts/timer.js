@@ -25,7 +25,16 @@ let timer = {
     },
 
     timeStep: function(countdown) {
-    (countdown) ? timer.value -= 1 : timer.value += 1;
+    if (countdown) {
+        timer.value -= 1;
+        if (timer.value < 0) {
+            gameplay.gameState = 2;
+            dom.updateGameOverModal();
+        }
+     }
+    else {
+        timer.value += 1;
+    }
     timer.refresh();
     },
 
