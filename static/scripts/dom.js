@@ -5,12 +5,7 @@ let dom = {
                 registerForm: {submitButtonName: 'register',
                         submitButtonContent: 'Register',
                         action: '/register'},
-                mainButtons: `<div class="buttons">
-                                <ul>
-                                    <li><a onclick="dom.insertForm('loginForm')" class="btn">Login</a></li>
-                                    <li><a onclick="dom.insertForm('registerForm')" class="btn">Register</a></li>
-                                </ul>
-                            </div>`
+                mainButtons: ''
     },
 
 
@@ -23,9 +18,9 @@ let dom = {
     insertForm: function (form_name) {
         let formContent = templates.getForm(this.forms[form_name]);
 
-        let buttons = document.getElementsByClassName('buttons');
-            this.forms.mainButtons = buttons[0].cloneNode(true);
-            buttons[0].remove();
+        let buttons = document.querySelector('.buttons');
+            this.forms.mainButtons = buttons.cloneNode(true);
+            buttons.remove();
 
         let menuContent = document.getElementById('menu-content');
             menuContent.innerHTML = formContent;
