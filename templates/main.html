@@ -2,28 +2,26 @@
 	{% block title %}Main Menu  {% endblock %}
 
 	{% block menu_title %}
-	<div class="mx-auto text-center col-3 badge-pill badge-light"><h1>Main Menu</h1></div>
+	<div class="mx-auto text-center col-3 badge-pill badge-light menu-title p-1"><h1>Main Menu</h1></div>
 	{% endblock %}
 
 	{% block content %}
-	<div id="menu-content" class="card shadow-lg col-6 mx-auto">
-		{% if 'player_name' in session %}
+	<div id="menu-content" class="card shadow-lg mx-auto my-2">
 		<div class="buttons mx-auto text-center">
-                {% for mode in gamemodes %}
-                    <div class="my-2">
-                        <a href="{{ url_for('game', mode=mode) }}">
-                            <button class="btn btn-info shadow">{{ mode.capitalize() }} Mode</button>
-                        </a>
-                    </div>
-                {% endfor %}
-				<a href="{{ url_for('logout') }}" class="btn">Logout</a>
-		</div>
-		{% else %}
-		<div class="buttons">
-			<ul>
-				<li><a onclick="dom.insertForm('loginForm')" class="custom-btn">Login</a></li>
-				<li><a onclick="dom.insertForm('registerForm')" class="custom-btn">Register</a></li>
-			</ul>
+            <div class="card-body">
+                {% if 'player_name' in session %}
+                    {% for mode in gamemodes %}
+                        <div class="my-2">
+                            <a href="{{ url_for('game', mode=mode) }}">
+                                <button class="btn btn-info shadow" mode="{{ mode }}">{{ mode.capitalize() }} Mode</button>
+                            </a>
+                        </div>
+                    {% endfor %}
+				    <a href="{{ url_for('logout') }}" class="btn">Logout</a>
+		        {% else %}
+				<button onclick="dom.insertForm('loginForm')" class="btn btn-info shadow">Login</button>
+				<button onclick="dom.insertForm('registerForm')" class="btn btn-info shadow">Register</button>
+            </div>
 		</div>
 		{% endif %}
 	</div>	
