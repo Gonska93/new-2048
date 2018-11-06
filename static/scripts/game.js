@@ -91,9 +91,8 @@ const gameplay = {
 
     addColors: function (element_id) {
         let el = $(`#${element_id}`),
-            content = el.text();
-
-        el.css('background-color', this.colors[content]);
+            color = (el.text() == '') ? 'white': generateColor(el.text()*1);
+        el.css('background-color', color);
     },
 
     getRandom: function (min, max) {
