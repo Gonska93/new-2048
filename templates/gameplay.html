@@ -3,6 +3,7 @@
 {% block title %}Game {% endblock %}
 
 {% block head %}
+<script src="{{ url_for('static', filename='scripts/color_generator.js') }}" defer></script>
 <script src="{{ url_for('static', filename='scripts/timer.js') }}" defer></script>
 <script src="{{ url_for('static', filename='scripts/game.js') }}" defer></script>
 <script src="{{ url_for('static', filename='scripts/chat.js') }}" defer></script>
