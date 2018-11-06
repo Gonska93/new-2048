@@ -1,17 +1,17 @@
 let templates = {
     getForm: function(form) {
-        return `<form id="form" method="POST" action="${form.action}">
-                                <h3>${form.submitButtonContent}</h3>
-                                <label for="username">Player Name</label>
-                                <input name="username" placeholder="Enter User Name" required />
-                                <br>
-                                <label for="password">Password</label>
-                                <br>
-                                <input type="password" name="password" placeholder="Enter Password" required>
-                                <button name="${form.submitButtonName}">${form.submitButtonContent}</button>
-                                <button id="back-button" onclick="dom.insertMainButtons()">Back</button>
-                                </div>
-                            </form>`
+        return `<div class="p-2">
+                    <form id="form" method="POST" action="${form.action}">
+                        <span class="text-center"><h3>${form.submitButtonContent}</h3></span>
+                            <input class="form-control" name="username" placeholder="Enter Playername..." required />
+                            <br />
+                            <input class="form-control" type="password" name="password" placeholder="Enter Password..." required>
+                        <div class="text-center mt-2">
+                            <button name="${form.submitButtonName}" class="btn btn-primary">${form.submitButtonContent}</button>
+                            <button id="back-button" class="btn btn-primary" onclick="dom.insertMainButtons()">Back</button>
+                        </div>
+                    </form>
+                </div>`
     },
     getTitleInput: function () {
         return `
