@@ -17,13 +17,12 @@ let templates = {
         return `
         <div id="saveInput">
             <label for="saveTitle">Save title:</label>
-            <input type="text" id="saveTitle" />
-            <button id="sendData" type="button">Save game</button>
+            <input class="form-control" type="text" id="saveTitle" />
+            <button id="sendData" type="button" class="btn btn-info game-btn">Save</button>
         </div>`
     },
     getSaveButton: function () {
-        return `
-        <a id="saveBtn" class="btn">Save</a>`
+        return `<button id="saveBtn" class="game-btn btn btn-secondary">Save</button>`
     },
     getFlashDiv: function(result) {
         return `
@@ -44,8 +43,7 @@ let templates = {
         <li><a id="state-${state.id}">${state.save_title}</a></li>`
     },
     getLoadBtn: function () {
-        return `
-        <a id="loadBtn" class="btn">Load</a>`
+        return `<button id="loadBtn" class="game-btn btn btn-secondary">Load</button>`
     }
 };
 

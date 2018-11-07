@@ -115,15 +115,20 @@ const gameplay = {
     },
 
     init: function() {
-        $('#start-button').on('click', gameplay.startGame);
+        let startButton = $('#start-button'),
+            loadBtn = $('#loadBtn');
+
+        startButton.on('click', gameplay.startGame);
         this.gameSettings = this.getGameSettings(this.gameMode);
         if (this.gameSettings.timerOn) timer.init();
+
+        loadBtn.off('click');
+        loadBtn.on('click', dataHandler.getSavedGames);
     },
 
     startGame: function() {
         let startButton = $('#start-button'),
             saveBtn = $('#saveBtn'),
-            loadBtn = $('#loadBtn'),
             startGame = $('#startGame');
 
         startGame.remove();
@@ -143,9 +148,6 @@ const gameplay = {
 
         saveBtn.off('click');
         saveBtn.on('click', dom.createTitleInput);
-
-        loadBtn.off('click');
-        loadBtn.on('click', dataHandler.getSavedGames);
     },
 
     resetProgress: function () {
