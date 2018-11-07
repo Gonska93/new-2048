@@ -29,10 +29,6 @@
     padding: 0.1rem;
 }
 
-#game-board {
-    min-height: 62vh;
-}
-
 #game-board table {
     height: 60vh;
 }

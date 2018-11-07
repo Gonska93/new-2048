@@ -1,16 +1,18 @@
-td {
+.gameboard div.col-3 {
     -webkit-border-radius: 7px;
     -moz-border-radius: 7px;
-    border: 2px solid gray;
-    border-radius: 15px;
-    min-width: 30px;
-    vertical-align: middle !important;
+    border-radius: 10px;
+    padding: 10%;
 }
 
-tr {
-    height: 20%;
-    min-height: 30px;
+div.col-3 span {
+    font-size: 2rem;
 }
+
+/*div.row {*/
+    /*height: 20%;*/
+    /*min-height: 30px;*/
+/*}*/
 
 /*#startGame {*/
     /*background-color: rgba(128, 128, 128, 0.51);*/
@@ -20,11 +22,6 @@ tr {
     /*padding: 45% 30%;*/
 /*}*/
 
-#game-board {
-    height: 100%;
-    width: 95%;
-}
-
 table {
     width: 100%;
     height: 100%;
@@ -32,7 +29,7 @@ table {
 
 @media only screen and (min-width: 768px) {
     #game-board {
-        height: 500px;
-        width: 500px;
+        height: 70%;
+        width: 70%;
     }
 }

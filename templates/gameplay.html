@@ -17,7 +17,7 @@
 
 
 {% block content %}
-	<div id="mode" data-mode="{{ gamemode }}" 
+	<div id="mode" data-mode="{{ gamemode }}"
 		 data-timer={% if gamemode == 'ranked' %}"0"{% else %}"10"{% endif %}
 		 class="">
 		 <h3 class="float-right">{{ gamemode.capitalize() }} mode</h3>
@@ -26,36 +26,30 @@
 	<div id="game-board" class="col-8 container rounded  mx-auto bg-light p-2">
 {#        <div id="startGame" class="text-center"><h3>To start game press 'Start'.</h3></div>#}
 
-        <table class="text-center table-bordered rounded">
-                <tr>
-                    <td id='A1'></td>
-                    <td id='A2'></td>
-                    <td id='A3'></td>
-                    <td id='A4'></td>
-                </tr>
+        <div class="gameboard text-center container">
+                <div class="row">
+                    <div class="col-3 border" id='A1'></div>
+                    <div class="col-3 border" id='A2'></div>
+                    <div class="col-3 border" id='A3'></div>
+                    <div class="col-3 border" id='A4'></div>
+                    <div class="w-100"></div>
+                    <div class="col-3 border" id='B1'></div>
+                    <div class="col-3 border" id='B2'></div>
+                    <div class="col-3 border" id='B3'></div>
+                    <div class="col-3 border" id='B4'></div>
+                    <div class="w-100"></div>
+                    <div class="col-3 border" id='C1'></div>
+                    <div class="col-3 border" id='C2'></div>
+                    <div class="col-3 border" id='C3'></div>
+                    <div class="col-3 border" id='C4'></div>
+                    <div class="w-100"></div>
+                    <div class="col-3 border" id='D1'></div>
+                    <div class="col-3 border" id='D2'></div>
+                    <div class="col-3 border" id='D3'></div>
+                    <div class="col-3 border" id='D4'></div>
+                </div>
 
-                <tr>
-                    <td id='B1'></td>
-                    <td id='B2'></td>
-                    <td id='B3'></td>
-                    <td id='B4'></td>
-                </tr>
-
-                <tr>
-                    <td id='C1'></td>
-                    <td id='C2'></td>
-                    <td id='C3'></td>
-                    <td id='C4'></td>
-                </tr>
-
-                <tr>
-                    <td id='D1'></td>
-                    <td id='D2'></td>
-                    <td id='D3'></td>
-                    <td id='D4'></td>
-                </tr>
-
-            </table>
+            </div>
 	</div>
 	<div class="buttons col-9 mx-auto m-1" id="game-buttons">
 
