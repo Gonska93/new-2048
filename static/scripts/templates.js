@@ -34,13 +34,13 @@ let templates = {
         return `
         <div id="savesDiv">
             <h3>Saved games:</h3>
-            <ul id="savesDiv-container"></ul>
-            <button>Back</button>
+            <div id="savesDiv-container"></div>
+            <button type="button" class="btn btn-secondary game-btn">Back</button>
         </div>`
     },
     getStateButton: function (state) {
         return `
-        <li><a id="state-${state.id}">${state.save_title}</a></li>`
+        <span><button type="button" class="btn btn-info game-btn" id="state-${state.id}">${state.save_title}</button></span>`
     },
     getLoadBtn: function () {
         return `<button id="loadBtn" class="game-btn btn btn-secondary">Load</button>`
