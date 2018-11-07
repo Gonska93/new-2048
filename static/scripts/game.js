@@ -123,7 +123,12 @@ const gameplay = {
     startGame: function() {
         let startButton = $('#start-button'),
             saveBtn = $('#saveBtn'),
-            loadBtn = $('#loadBtn');
+            loadBtn = $('#loadBtn'),
+            startGame = $('#startGame');
+
+        startGame.remove();
+
+        gameplay.gameBoard = [[0,0,0,0],[0,0,0,0],[0,0,0,0],[0,0,0,0]];
 
         startButton.off('click');
         startButton.on('click', gameplay.resetProgress);
@@ -146,8 +151,10 @@ const gameplay = {
     resetProgress: function () {
         let startButton = $('#start-button'),
             saveBtn = $('#saveBtn'),
-            loadBtn = $('#loadBtn');
+            loadBtn = $('#loadBtn'),
+            gameBoard = $('#game-board');
 
+        gameBoard.prepend(templates.getGameStart());
 
         startButton.off('click');
         startButton.on('click', gameplay.startGame);
@@ -156,7 +163,6 @@ const gameplay = {
         saveBtn.off('click');
         (loadBtn.length) ? loadBtn.off('click'): dom.restoreLoadBtn();
        
-        gameplay.gameBoard = [[0,0,0,0],[0,0,0,0],[0,0,0,0],[0,0,0,0]];
         gameplay.started = false;
         gameplay.score = 0;
         gameplay.refreshScore();
