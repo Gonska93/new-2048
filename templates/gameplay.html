@@ -8,6 +8,9 @@
 <script src="{{ url_for('static', filename='scripts/game.js') }}" defer></script>
 <script src="{{ url_for('static', filename='scripts/chat.js') }}" defer></script>
 <script src="{{ url_for('static', filename='scripts/data_handler.js') }}"></script>
+
+<link rel="stylesheet" href="{{ url_for('static', filename='css/{}.css'.format(gamemode)) }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/gameplay.css') }}">
 {% endblock %}
 
 
