@@ -18,7 +18,7 @@
 
 {% block content %}
 	<div id="mode" data-mode="{{ gamemode }}" 
-		 data-timer={% if gamemode == 'ranked' %}"0"{% else %}"600"{% endif %}
+		 data-timer={% if gamemode == 'ranked' %}"0"{% else %}"10"{% endif %}
 		 class="">
 		 <h3 class="float-right">{{ gamemode.capitalize() }} mode</h3>
 		 <h3>Score: <span id="score">0</span></h3>
