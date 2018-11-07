@@ -8,6 +8,8 @@
 <script src="{{ url_for('static', filename='scripts/game.js') }}" defer></script>
 <script src="{{ url_for('static', filename='scripts/chat.js') }}" defer></script>
 <script src="{{ url_for('static', filename='scripts/data_handler.js') }}"></script>
+<script src="{{ url_for('static', filename='scripts/hammer.js') }}" defer></script>
+<script src="{{ url_for('static', filename='scripts/mobile.js') }}" defer></script>
 
 <link rel="stylesheet" href="{{ url_for('static', filename='css/{}.css'.format(gamemode)) }}">
 <link rel="stylesheet" href="{{ url_for('static', filename='css/gameplay.css') }}">
@@ -15,14 +17,16 @@
 
 
 {% block content %}
-	<div id="mode" 
-		 data-mode="{{ gamemode }}" data-timer={% if gamemode == 'ranked' %}"0"{% else %}"600"{% endif %}>
-		{{ gamemode.capitalize() }} mode
+	<div id="mode" data-mode="{{ gamemode }}" 
+		 data-timer={% if gamemode == 'ranked' %}"0"{% else %}"600"{% endif %}
+		 class="">
+		 <h3 class="float-right">{{ gamemode.capitalize() }} mode</h3>
+		 <h3>Score: <span id="score">0</span></h3>
 	</div>
 	<div id="game-board" class="col-8 container rounded  mx-auto bg-light p-2">
 {#        <div id="startGame" class="text-center"><h3>To start game press 'Start'.</h3></div>#}
 
-        <table class="text-center table-bordered">
+        <table class="text-center table-bordered rounded">
                 <tr>
                     <td id='A1'></td>
                     <td id='A2'></td>
@@ -53,20 +57,17 @@
 
             </table>
 	</div>
-	<div class="buttons col-4" id="game-buttons">
+	<div class="buttons col-9 mx-auto m-1" id="game-buttons">
 
-		<div id="score">0</div>
+		<button id="start-button" class="start-btn btn btn-info col-12">Start Game</button>
 
-		<button id="start-button">Start Game</button>
-	
-		<ul>
+		<div id="option-buttons" class="text-center container">
 			{% if gamemode == 'classic' %}
-			<li><a id="loadBtn" class="btn">Load</a></li>
-			<li><a id="saveBtn" class="btn">Save</a></li>
+			<button id="loadBtn" class="game-btn btn">Load</button>
+			<button id="saveBtn" class="game-btn btn">Save</button>
 			{% endif %}
-			<li><a href="{{ url_for('main') }}" class="btn">Back</a></li>
-			<li><a href="{{ url_for('logout') }}" class="btn">Logout</a></li>
-		</ul>
+			<a href="{{ url_for('main') }}"><button class="game-btn btn">Back</button></a>
+		</div>
 
 	</div>
 	<div id="chat-container">

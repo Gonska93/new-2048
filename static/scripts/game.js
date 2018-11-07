@@ -2,7 +2,7 @@ document.onkeydown = function(ev) {
     if (gameplay.started === true) {
         if (gameplay.checkAnyMovementAvailability(gameplay.gameBoard)) {
             ev = ev || window.event;
-            switch(ev.which || ev.keyCode) {
+            switch(ev.which || ev.keyCode ) {
                 case 37: // left
                 gameplay.gameBoard = gameplay.movement(1, gameplay.gameBoard);
                 break;
