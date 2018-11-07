@@ -22,15 +22,25 @@ document.onkeydown = function(ev) {
                 default: return; // exit this handler for other keys
             }
             gameplay.refreshGameBoard(gameplay.gameBoard);
+
+            if (gameplay.gameState == 1) {
+                dom.updateGameOverModal();
+            }
+
             ev.preventDefault(); // prevent the default action (scroll / move caret)
         }
         else {
-            document.write('GAME OVER!');
+            dom.updateGameOverModal()
         }
     }
 };
 
 const gameplay = {
+    emptyBoard: [[0, 0, 0, 0],
+                 [0, 0, 0, 0],
+                 [0, 0, 0, 0],
+                 [0, 0, 0, 0]],
+
     gameBoard: [[0, 0, 0, 0],
                 [0, 0, 0, 0],
                 [0, 0, 0, 0],
@@ -46,7 +56,9 @@ const gameplay = {
     started: false,
 
     gameMode: $('#mode').data('mode'),
-    
+
+    gameState: 0,
+
     score: 0,
 
     gameSettings: {},
@@ -162,6 +174,8 @@ const gameplay = {
        
         gameplay.started = false;
         gameplay.score = 0;
+        timer.refresh();
+        gameplay.resetGameProgress();
         gameplay.refreshScore();
 
         if (gameplay.gameSettings.timerOn) timer.stopTimer();
@@ -227,11 +241,18 @@ const gameplay = {
                     comparison = this.arraysEqual(boardBeforeMovement, game_board);
                     break;
             }
-            if (!(comparison)) {
+
+            if (!(comparison)) { // Check if any movement has been made, if yes then insert new tile (2 or 4)
                 game_board = this.insertRandomTile(game_board);
             }
         }
         return game_board
+    },
+
+    resetGameProgress: function() {
+        gameplay.started = false;
+        gameplay.score = this.constant.zero;
+        gameplay.gameBoard = gameplay.emptyBoard;
     },
 
     // default - moving tiles to left side
@@ -269,16 +290,22 @@ const gameplay = {
                 (score) ? gameplay.score += row[0] * 10: null     
                 row[0] = row[0]*this.constant.two;
                 row[1] = this.constant.zero;
+
+                if ((row[0] === gameplay.gameSettings.maxTile) && score) {gameplay.gameState = 1} 
             }
             else if ((row[1] === row[2]) && (row[1] !== this.constant.zero)) {
                 (score) ? gameplay.score += row[1] * 10: null  
                 row[1] = row[1]*this.constant.two;
                 row[2] = this.constant.zero;
+
+                if ((row[1] === gameplay.gameSettings.maxTile) && score) {gameplay.gameState = 1} 
             }
             else if ((row[2] === row[3]) && (row[2] !== this.constant.zero)) {
                 (score) ? gameplay.score += row[2] * 10: null 
                 row[2] = row[2]*this.constant.two;
                 row[3] = this.constant.zero;
+                
+                if ((row[2] === gameplay.gameSettings.maxTile) && score) {gameplay.gameState = 1} 
             }
         }
         return temp
@@ -344,6 +371,7 @@ const gameplay = {
                 return true;                                                 // don't check any other movements instantly return true
             }
         }
+        gameplay.gameState = 2;
         return false;
     }
 };
