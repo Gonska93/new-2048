@@ -172,8 +172,7 @@ const gameplay = {
         startButton.text('Start Game');
 
         saveBtn.off('click');
-        (loadBtn.length) ? loadBtn.off('click'): dom.restoreLoadBtn();
-       
+        if (!loadBtn.length) dom.restoreLoadBtn();
         gameplay.started = false;
         gameplay.score = 0;
         timer.refresh();
