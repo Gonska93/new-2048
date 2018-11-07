@@ -94,16 +94,18 @@ const gameplay = {
         let displayBoard = game_board.flat();
 
         for (let i = 0; i < this.table.length; i++) {
-            $(`#${gameplay.table[i]}`).text(
+            let tile = $('<span class="position-absolute"></span>');
+            tile.text(
                 (displayBoard[i]) ? displayBoard[i]: ''
             );
+            $(`#${gameplay.table[i]}`).html(tile);
             this.addColors(this.table[i]);
         }
     },
 
     addColors: function (element_id) {
         let el = $(`#${element_id}`),
-            color = (el.text() == '') ? 'white': generateColor(el.text()*1);
+            color = (el.text() === '') ? 'white': generateColor(el.text()*1);
         el.css('background-color', color);
     },
 
