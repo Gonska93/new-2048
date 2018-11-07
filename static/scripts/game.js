@@ -151,10 +151,7 @@ const gameplay = {
     resetProgress: function () {
         let startButton = $('#start-button'),
             saveBtn = $('#saveBtn'),
-            loadBtn = $('#loadBtn'),
-            gameBoard = $('#game-board');
-
-        gameBoard.prepend(templates.getGameStart());
+            loadBtn = $('#loadBtn');
 
         startButton.off('click');
         startButton.on('click', gameplay.startGame);

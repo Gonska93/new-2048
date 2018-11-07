@@ -46,9 +46,6 @@ let templates = {
     getLoadBtn: function () {
         return `
         <a id="loadBtn" class="btn">Load</a>`
-    },
-    getGameStart: function () {
-        return `<div id="startGame" class="text-center"><h3>To start game press 'Start'.</h3></div>`
     }
 };
 
