@@ -22,9 +22,13 @@
 	<div id="mode" data-mode="{{ gamemode }}"
 		 data-timer={% if gamemode == 'ranked' %}"0"{% else %}"10"{% endif %}
 		 class="">
-		 <h3 class="float-right">{{ gamemode.capitalize() }} mode</h3>
-		 <h3>Score: <span id="score">0</span></h3>
+		 <h3 class="float-right">Mode:</h3>
+		 <h3>Score: </h3>
+		 <h3 class="float-right">{{ gamemode.capitalize() }}</h3>
+		 <h3 id="score">0</h3>
+		 
 	</div>
+
 	<div id="game-board" class="col-8 container rounded  mx-auto bg-light p-2">
 {#        <div id="startGame" class="text-center"><h3>To start game press 'Start'.</h3></div>#}
 
