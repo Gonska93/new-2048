@@ -94,11 +94,7 @@ const gameplay = {
         let displayBoard = game_board.flat();
 
         for (let i = 0; i < this.table.length; i++) {
-            let tile = $('<span class="position-absolute"></span>');
-            tile.text(
-                (displayBoard[i]) ? displayBoard[i]: ''
-            );
-            $(`#${gameplay.table[i]}`).html(tile);
+            $(`#${gameplay.table[i]}`).text((displayBoard[i]) ? displayBoard[i]: '');
             this.addColors(this.table[i]);
         }
     },
