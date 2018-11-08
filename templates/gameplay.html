@@ -28,32 +28,32 @@
 	<div id="game-board" class="col-8 container rounded  mx-auto bg-light p-2">
 {#        <div id="startGame" class="text-center"><h3>To start game press 'Start'.</h3></div>#}
 
-        <div class="gameboard text-center container">
+        <div class="gameboard container">
                 <div class="row">
-                    <div class="col-3 border" id='A1'></div>
-                    <div class="col-3 border" id='A2'></div>
-                    <div class="col-3 border" id='A3'></div>
-                    <div class="col-3 border" id='A4'></div>
+                    <div class="border" id='A1'></div>
+                    <div class="border" id='A2'></div>
+                    <div class="border" id='A3'></div>
+                    <div class="border" id='A4'></div>
                     <div class="w-100"></div>
-                    <div class="col-3 border" id='B1'></div>
-                    <div class="col-3 border" id='B2'></div>
-                    <div class="col-3 border" id='B3'></div>
-                    <div class="col-3 border" id='B4'></div>
+                    <div class="border" id='B1'></div>
+                    <div class="border" id='B2'></div>
+                    <div class="border" id='B3'></div>
+                    <div class="border" id='B4'></div>
                     <div class="w-100"></div>
-                    <div class="col-3 border" id='C1'></div>
-                    <div class="col-3 border" id='C2'></div>
-                    <div class="col-3 border" id='C3'></div>
-                    <div class="col-3 border" id='C4'></div>
+                    <div class="border" id='C1'></div>
+                    <div class="border" id='C2'></div>
+                    <div class="border" id='C3'></div>
+                    <div class="border" id='C4'></div>
                     <div class="w-100"></div>
-                    <div class="col-3 border" id='D1'></div>
-                    <div class="col-3 border" id='D2'></div>
-                    <div class="col-3 border" id='D3'></div>
-                    <div class="col-3 border" id='D4'></div>
+                    <div class="border" id='D1'></div>
+                    <div class="border" id='D2'></div>
+                    <div class="border" id='D3'></div>
+                    <div class="border" id='D4'></div>
                 </div>
 
             </div>
 	</div>
-	<div class="buttons col-9 mx-auto m-1" id="game-buttons">
+	<div class="buttons col-12 mx-auto m-1" id="game-buttons">
 
 		<button id="start-button" class="start-btn btn btn-info col-12">Start Game</button>
 
@@ -68,19 +68,24 @@
 	</div>
 	<div id="chat-container" class="card bg-secondary container py-2">
 
-		<div id="chat-title">
-			CHAT TITLE
-		</div>
+		<div id="chat-title"></div>
 
 		<div id="chat-body">
 
-			<div id="chat-messages" style="overflow-y: auto; word-break: break-all;">
+			<div id="chat-messages" class="card bg-light border border-info">
 			</div>
 
-			<div id="chat-input">
-				<form action="" method="POST">
-					<input type="text" id="user-input"/>
-					<button id="message-submit">Submit</button>
+			<div id="chat-input" class="mt-1 mx-auto">
+				<form method="POST" id="chat-form">
+					<input type="text" id="user-input" class="col-1"/>
+					<button id="message-submit" class="btn btn-primary col-1 mt-1">Enter</button>
+					
+					<!--<div class="input-group mb-3">
+						<input type="text" class="form-control"  aria-describedby="message-submit">
+						<div class="input-group-append">
+							<button class="btn btn-outline-primary" id="message-submit">Button</button>
+						</div>
+					</div>-->
 				</form>
 			</div>
 
