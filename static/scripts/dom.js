@@ -66,6 +66,7 @@ let dom = {
 
     updateGameOverModal: function() {
         alert(`You ${(gameplay.gameState === 1) ? 'won':'lost'}`);
+        (gameplay.gameState === 1) ? swal("Good job!", "You won!", "success"): swal("Bad luck?!", "You lost!", "error")
         gameplay.gameState = 0;
         gameplay.started = false;
         timer.stopTimer();
