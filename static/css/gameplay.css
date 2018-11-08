@@ -1,8 +1,11 @@
-.gameboard div.col-3 {
+.gameboard div.border {
     -webkit-border-radius: 7px;
     -moz-border-radius: 7px;
     border-radius: 10px;
-    padding: 10%;
+    width: 25%;
+    height: 12vh;
+    text-align: center;
+    padding-top: 4vh;
 }
 
 div.col-3 span {
