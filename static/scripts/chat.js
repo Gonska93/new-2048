@@ -15,12 +15,15 @@ socket.on( 'connect', () => {
 
 socket.on( 'response', ( msg ) => {
     if (msg.message) {
-        let messageToDisplay = (msg.player_name) ?
-        `${msg.player_name}:${msg.message}`: msg.message;
-        let messageDiv = $('<div class="chat-message"></div>');
+        let messageDiv = $('<div class="chat-message"></div>'),
+            test = document.getElementById('chat-messages'),
+            date = new Date(),
+            hour = date.getHours(),
+            minute = date.getMinutes(),
+            messageToDisplay = (msg.player_name) ? `${hour}:${minute} ${msg.player_name}: ${msg.message}`: msg.message;
+
         messageDiv.text(`${messageToDisplay}`);
         $('#chat-messages').append(messageDiv);
-        let test = document.getElementById('chat-messages');
         test.scrollTop = test.scrollHeight;
     }
 
