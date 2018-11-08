@@ -3,6 +3,16 @@
     max-width: 100%;
 }
 
+body {
+    font-family: 'Indie Flower', cursive;
+    font-family: 'Permanent Marker', cursive;
+}
+
+.row div[style] {
+    height: 30px;
+}
+
+
 .menu-title {
     min-width: 50%;
 }
