@@ -8,12 +8,12 @@
 	{% block content %}
 	<div id="menu-content" class="card shadow-lg mx-auto my-2 col-9">
 		<div class="buttons mx-auto text-center col-9">
-            <div class="card-body col-9">
+            <div class="card-body">
                 {% if 'player_name' in session %}
                     {% for mode in gamemodes %}
                         <div class="my-2">
                             <a href="{{ url_for('game', mode=mode) }}">
-                                <button class="menu-btn btn btn-info shadow col-3" mode="{{ mode }}">{{ mode.capitalize() }} Mode</button>
+                                <button class="menu-btn btn btn-info shadow col" mode="{{ mode }}">{{ mode.capitalize() }} Mode</button>
                             </a>
                         </div>
                     {% endfor %}
