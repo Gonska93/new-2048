@@ -24,6 +24,18 @@ $ source <your_venv_name>/bin/activate
 (<your_venv_name>)$ pip install -r requirements.txt
 ```
 
+The app is written for Postgres DB, so it will be also required, you can download
+postgres here: https://www.postgresql.org/download/
+First create a database, then run the schema.
+SQL file with base schema is in data/ folder, you can run it via psql with:
+
+```psql
+postgres=# create database 2048webapp
+CREATE DATABASE
+postgres=# \c 2048webapp  // connect to created database
+2048webapp=# \i data/data_base.sql
+```
+
 ## Technical stuff
 
 Server-side is done in Python using Flask, front-end with vanilla JS, JQuery and Bootstrap 4.
